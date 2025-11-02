@@ -1,0 +1,654 @@
+Perfect 👍 Let’s create a **comprehensive list of advanced-level Odoo interview questions with answers** — suitable for a developer with around **1.5 years of experience**.
+
+These cover **Python, ORM, XML, JS (Owl), POS, QWeb, and Functional concepts**.
+
+---
+
+## ⚙️ **Odoo Technical Interview Questions (1.5 Years Experience)**
+
+---
+
+### **1. What is the difference between `@api.depends` and `@api.onchange`?**
+
+**Answer:**
+
+* `@api.depends`: Used for computed fields; updates automatically when dependent fields change (server-side).
+* `@api.onchange`: Works only in the UI form; triggers temporarily before saving (client-side).
+
+🧠 Example:
+
+```python
+@api.depends('price', 'qty')
+def _compute_total(self):
+    self.total = self.price * self.qty
+
+@api.onchange('product_id')
+def _onchange_product_id(self):
+    self.price = self.product_id.list_price
+```
+
+---
+
+### **2. How does Odoo ORM handle recordsets?**
+
+**Answer:**
+Odoo ORM works with **recordsets**, which can be single or multiple records.
+
+* They are **lazy-evaluated**, **ordered**, and **can be iterated**.
+* Methods can be called on multi-recordsets, and Odoo automatically loops over them.
+
+🧠 Example:
+
+```python
+for record in self:
+    record.name = record.name.upper()
+```
+
+---
+
+### **3. Difference between `create`, `write`, and `update` methods?**
+
+**Answer:**
+
+| Method         | Purpose                                           | Trigger                             |
+| -------------- | ------------------------------------------------- | ----------------------------------- |
+| `create(vals)` | Creates new record                                | Called once at record creation      |
+| `write(vals)`  | Updates existing record                           | Called when modifying               |
+| `update(vals)` | Updates multiple records directly (no automation) | Not recommended for computed fields |
+
+🧠 Example:
+
+```python
+@api.model
+def create(self, vals):
+    vals['name'] = vals['name'].upper()
+    return super().create(vals)
+```
+
+---
+
+### **4. What is the use of `api.model`, `api.multi`, `api.one`?**
+
+**Answer:**
+
+* `@api.model`: Used for methods not dependent on a particular record.
+* `@api.multi`: Used for methods that act on multiple records (default in Odoo 13+).
+* `@api.one`: Deprecated — automatically iterated single record.
+
+---
+
+### **5. What is the difference between `Many2one`, `One2many`, and `Many2many` fields?**
+
+**Answer:**
+
+| Field Type  | Description                                           | Example                                                     |
+| ----------- | ----------------------------------------------------- | ----------------------------------------------------------- |
+| `Many2one`  | A record links to one other record                    | order_id = fields.Many2one('sale.order')                    |
+| `One2many`  | A record links to multiple child records              | order_line = fields.One2many('sale.order.line', 'order_id') |
+| `Many2many` | A record links to multiple records in both directions | tags = fields.Many2many('product.tag')                      |
+
+---
+
+### **6. How to inherit an existing model and add custom logic?**
+
+**Answer:**
+Using `_inherit` or `_inherits`.
+
+🧠 Example:
+
+```python
+class SaleOrder(models.Model):
+    _inherit = 'sale.order'
+
+    custom_field = fields.Char('Custom Field')
+
+    def action_confirm(self):
+        res = super().action_confirm()
+        self.message_post(body="Order Confirmed!")
+        return res
+```
+
+---
+
+### **7. What is the difference between `_inherit` and `_inherits`?**
+
+**Answer:**
+
+| Feature | `_inherit`                | `_inherits`                            |
+| ------- | ------------------------- | -------------------------------------- |
+| Type    | Classical inheritance     | Delegation inheritance                 |
+| Data    | Same table                | Related model’s table                  |
+| Example | Add field to `sale.order` | Extend partner fields in another model |
+
+---
+
+### **8. What is the purpose of `@api.constrains` decorator?**
+
+**Answer:**
+To validate records on write or create.
+
+🧠 Example:
+
+```python
+@api.constrains('capacity')
+def _check_capacity(self):
+    if self.capacity <= 0:
+        raise ValidationError("Capacity must be greater than zero.")
+```
+
+---
+
+### **9. How to create a computed field and store it in the database?**
+
+**Answer:**
+
+```python
+total = fields.Float(compute="_compute_total", store=True)
+
+@api.depends('price', 'qty')
+def _compute_total(self):
+    for rec in self:
+        rec.total = rec.price * rec.qty
+```
+
+`store=True` ensures it’s stored in the database for faster queries.
+
+---
+
+### **10. What is a domain filter in Odoo?**
+
+**Answer:**
+A **domain** restricts records shown in fields.
+
+🧠 Example:
+
+```python
+partner_id = fields.Many2one('res.partner', domain=[('customer_rank', '>', 0)])
+```
+
+---
+
+### **11. How can you add a smart button in Odoo form view?**
+
+**Answer:**
+Inherit form view XML and add button under `<header>`.
+
+🧠 Example:
+
+```xml
+<header>
+    <button name="action_view_invoice" string="Invoices"
+            type="object" class="oe_stat_button" icon="fa-file"/>
+</header>
+```
+
+---
+
+### **12. How to call Python method from XML button?**
+
+**Answer:**
+Use `type="object"` and `name="method_name"`.
+
+🧠 Example:
+
+```xml
+<button name="action_approve" string="Approve" type="object" class="btn-primary"/>
+```
+
+And in Python:
+
+```python
+def action_approve(self):
+    self.state = 'approved'
+```
+
+---
+
+### **13. How do you handle access rights and record rules in Odoo?**
+
+**Answer:**
+
+* **Access rights (`ir.model.access.csv`)** control *create, read, write, delete*.
+* **Record rules** restrict records visible to users dynamically.
+
+🧠 Example rule:
+
+```xml
+<record id="rule_my_model_user" model="ir.rule">
+    <field name="name">My Model User Rule</field>
+    <field name="model_id" ref="model_my_model"/>
+    <field name="domain_force">[('user_id','=',user.id)]</field>
+</record>
+```
+
+---
+
+### **14. How do you use QWeb templates in Odoo?**
+
+**Answer:**
+QWeb is used for **reporting and website rendering**.
+
+🧠 Example:
+
+```xml
+<t t-name="custom_report">
+  <t t-foreach="docs" t-as="doc">
+    <p><t t-esc="doc.name"/></p>
+  </t>
+</t>
+```
+
+---
+
+### **15. How to extend JavaScript in Odoo POS?**
+
+**Answer:**
+Using `patch` and `registerPatch`.
+
+🧠 Example:
+
+```js
+import { ProductCard } from "@point_of_sale/app/screens/product_screen/product_card/product_card";
+import { patch } from "@web/core/utils/patch";
+
+patch(ProductCard.prototype, "CustomQtyDisplay", {
+    setup() {
+        this._super();
+        this.qty = this.props.product.qty_available;
+    },
+});
+```
+
+---
+
+### **16. What is a computed stored field vs non-stored field?**
+
+**Answer:**
+
+* **Stored**: Value is saved in the DB and updated only when dependencies change.
+* **Non-stored**: Computed every time it’s accessed (slower but always fresh).
+
+---
+
+### **17. What is the difference between `sudo()` and `with_user()`?**
+
+**Answer:**
+
+* `sudo()`: Executes ignoring access rights.
+* `with_user(user)`: Executes with that user’s rights.
+
+🧠 Example:
+
+```python
+self.sudo().write({'state': 'done'})
+self.with_user(self.env.ref('base.user_admin')).write({'approved': True})
+```
+
+---
+
+### **18. What is the role of `env` in Odoo?**
+
+**Answer:**
+`self.env` gives access to:
+
+* `self.env.user` – current user
+* `self.env.cr` – cursor
+* `self.env.company` – current company
+* `self.env.context` – active context
+* `self.env['model.name']` – model registry
+
+---
+
+### **19. How to trigger server action or automation in Odoo?**
+
+**Answer:**
+Through **Automated Actions** (`ir.actions.server`) or Python methods.
+
+Example: Send message when state changes to confirmed
+
+```python
+def write(self, vals):
+    res = super().write(vals)
+    if vals.get('state') == 'confirm':
+        for rec in self:
+            rec.message_post(body="Session confirmed!")
+    return res
+```
+
+---
+
+### **20. What are transient models and when do you use them?**
+
+**Answer:**
+`TransientModel` is used for **temporary data**, like wizards.
+
+🧠 Example:
+
+```python
+class UpdateWizard(models.TransientModel):
+    _name = 'update.wizard'
+    field = fields.Char()
+
+    def action_update(self):
+        # Perform action and close wizard
+        return {'type': 'ir.actions.act_window_close'}
+```
+
+---
+
+
+
+
+
+
+Perfect 💪
+Here’s **Part 2 — Advanced Functional + Deployment + Debugging Questions (for 1.5-year experienced Odoo Developer)**
+
+These are asked in **second-round technical interviews** or **client discussions** — when you already know Odoo coding and architecture.
+
+---
+
+## 🧩 **Advanced Functional + Deployment + Debugging Questions**
+
+---
+
+### **1. What are different Odoo apps you’ve worked with and how they connect?**
+
+**Answer:**
+Common interlinked modules:
+
+* **Sales ↔ Inventory ↔ Accounting**
+* **Purchase ↔ Inventory ↔ Vendor Bills**
+* **Manufacturing (MRP)** connects with **BOM**, **Work Orders**, and **Stock Moves**
+* **HR modules** connect through **Employees**, **Attendance**, **Payroll**, **Leaves**
+
+🧠 Example:
+Confirming a **Sales Order** → creates **Delivery Order** → validates → generates **Invoice** automatically.
+
+---
+
+### **2. What is the workflow of a Sales Order in Odoo?**
+
+**Answer:**
+
+1. Create quotation
+2. Confirm order → stock picking created
+3. Delivery done → invoice created
+4. Payment registered → journal entry created
+
+---
+
+### **3. How does the accounting flow work in Odoo?**
+
+**Answer:**
+
+* Every transaction (SO, PO, Expense, Payment) generates a **journal entry**.
+* Moves are stored in `account.move`, with lines in `account.move.line`.
+* Balance = Debit - Credit → must always be 0.
+
+---
+
+### **4. What is the purpose of a Bill of Materials (BOM)?**
+
+**Answer:**
+A BOM defines the **components** required to manufacture a product.
+It is used in **MRP** for:
+
+* Production planning
+* Cost calculation
+* Material availability tracking
+
+---
+
+### **5. How can you customize approval workflows in Odoo?**
+
+**Answer:**
+You can:
+
+* Add custom states (e.g., `draft → approve → reject`)
+* Create buttons to trigger state changes
+* Add conditions or groups (via XML `attrs` or record rules)
+* Optionally automate using server actions
+
+🧠 Example:
+
+```python
+state = fields.Selection([
+    ('draft', 'Draft'),
+    ('approve', 'Approved'),
+    ('reject', 'Rejected'),
+], default='draft')
+
+def action_approve(self):
+    self.state = 'approve'
+```
+
+---
+
+### **6. What are Record Rules and Access Rights?**
+
+**Answer:**
+
+| Type          | Controls                           | Level        |
+| ------------- | ---------------------------------- | ------------ |
+| Access Rights | CRUD (Create, Read, Write, Delete) | Model level  |
+| Record Rules  | Which records user can see         | Record level |
+
+🧠 Example:
+A salesperson can only see his own sales orders.
+
+---
+
+### **7. What are the types of views available in Odoo?**
+
+**Answer:**
+
+* Form view
+* Tree view (List)
+* Kanban view
+* Calendar view
+* Graph / Pivot
+* Activity view
+* Search view
+* Dashboard (custom)
+
+---
+
+### **8. What is difference between domain and context?**
+
+**Answer:**
+
+| Feature | Domain                   | Context                              |
+| ------- | ------------------------ | ------------------------------------ |
+| Use     | Filter records           | Pass additional data                 |
+| Example | `[('state','=','sale')]` | `{'default_partner_id': partner.id}` |
+
+---
+
+### **9. What is a Server Action?**
+
+**Answer:**
+A **server action** automates backend logic without writing code — can:
+
+* Execute Python code
+* Send emails
+* Update records
+* Call another action
+
+🧠 Example:
+Auto-send email when state changes to ‘confirmed’.
+
+---
+
+### **10. How to schedule automatic tasks in Odoo?**
+
+**Answer:**
+Using **Scheduled Actions (ir.cron)**.
+
+🧠 Example:
+Send reminder every day:
+
+```python
+<record id="ir_cron_send_reminder" model="ir.cron">
+    <field name="name">Send Reminder</field>
+    <field name="model_id" ref="model_training_session"/>
+    <field name="state">code</field>
+    <field name="code">model.send_reminder()</field>
+    <field name="interval_number">1</field>
+    <field name="interval_type">days</field>
+</record>
+```
+
+---
+
+### **11. How to debug Odoo errors effectively?**
+
+**Answer:**
+✅ Steps:
+
+1. Enable developer mode
+2. Check **Logs (odoo.log)** for Python traceback
+3. Use `print()` or `pdb.set_trace()` in code
+4. Use browser console for JS errors
+5. Inspect network requests (via Chrome dev tools)
+
+---
+
+### **12. How do you deploy Odoo on Ubuntu manually?**
+
+**Answer:**
+🧠 Key steps:
+
+1. Install dependencies → `sudo apt install python3-pip postgresql git`
+2. Create PostgreSQL user → `createuser -s odoo17`
+3. Clone Odoo → `git clone https://github.com/odoo/odoo.git -b 17.0`
+4. Install requirements → `pip3 install -r requirements.txt`
+5. Create config file → `/etc/odoo.conf`
+6. Start → `./odoo-bin -c /etc/odoo.conf`
+
+---
+
+### **13. How do you deploy on Odoo.sh?**
+
+**Answer:**
+
+* You push your custom modules to a GitHub repo connected to **Odoo.sh**.
+* It automatically:
+
+  * Builds staging and production environments
+  * Installs dependencies
+  * Runs tests
+  * Allows shell access & log viewing
+
+---
+
+### **14. What is difference between Community and Enterprise Edition?**
+
+**Answer:**
+
+| Feature  | Community           | Enterprise                                            |
+| -------- | ------------------- | ----------------------------------------------------- |
+| License  | LGPL                | Proprietary                                           |
+| Features | Core apps only      | Extra apps (Studio, Helpdesk, VoIP, Accounting, etc.) |
+| Support  | No official support | Official Odoo support                                 |
+
+---
+
+### **15. What is Odoo ORM vs SQL query — when to use which?**
+
+**Answer:**
+Use **ORM** for normal operations to respect rules, access rights, and triggers.
+Use **SQL** only when:
+
+* Performance critical (many records)
+* Complex joins needed
+
+🧠 Example:
+
+```python
+self.env.cr.execute("SELECT id, name FROM res_partner WHERE active=True")
+```
+
+---
+
+### **16. How to handle multi-company or multi-currency setup?**
+
+**Answer:**
+Odoo automatically filters data by:
+
+* `company_id`
+* `currency_id`
+
+✅ You can set:
+
+```python
+company_dependent_field = fields.Float(company_dependent=True)
+```
+
+And use:
+
+```python
+self = self.with_company(company)
+```
+
+---
+
+### **17. What is chatter and how to post messages?**
+
+**Answer:**
+Chatter tracks communication and activities on a record.
+Use `message_post()` API:
+
+```python
+self.message_post(body="Order Approved!", subtype_xmlid="mail.mt_comment")
+```
+
+---
+
+### **18. What is the purpose of `ir.model.data`?**
+
+**Answer:**
+Stores **XML IDs** of records to reference them in code and XML:
+
+```xml
+ref('module_name.record_id')
+```
+
+---
+
+### **19. How to add custom filters in search view?**
+
+**Answer:**
+
+```xml
+<search>
+    <filter name="approved" string="Approved" domain="[('state','=','approved')]"/>
+</search>
+```
+
+---
+
+### **20. How do you handle module version upgrades or migrations?**
+
+**Answer:**
+Steps:
+
+1. Backup database
+2. Compare models (added/removed fields)
+3. Write migration scripts for renamed fields
+4. Update module manifest version
+5. Test after upgrade using `-u module_name`
+
+---
+
+## 🚀 **Bonus: Real-World Scenario Questions**
+
+| Question                                      | Example Answer                                                                                     |
+| --------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| How to make a field read-only for some users? | Use `attrs="{'readonly': [('user_id','!=',uid)]}"` or record rule                                  |
+| How to show button only in specific state?    | `attrs="{'invisible': [('state','!=','draft')]}"`                                                  |
+| How to link wizard with model?                | Use `context` to pass active_ids to wizard                                                         |
+| How to optimize slow Odoo?                    | Use `store=True`, add SQL indexes, avoid nested loops, use batch writes                            |
+| How to prevent duplicate records?             | Use SQL constraint: `_sql_constraints = [('unique_name', 'unique(name)', 'Name must be unique!')]` |
+
+
