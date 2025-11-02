@@ -1,0 +1,15 @@
+<odoo>
+	 
+		<menuitem id="menu_custom_import_root"
+							name="Custom Import"
+							parent="sale.sale_menu_root"
+							sequence="99"/>
+
+		<menuitem id="menu_custom_import_child"
+							name="Custom Import"
+							parent="menu_custom_import_root"
+							actions="custom_import_action"
+							sequence="99"/>
+
+		
+</odoo>

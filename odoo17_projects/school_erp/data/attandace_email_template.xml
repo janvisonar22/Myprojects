@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- <?xml version="1.0" encoding="utf-8"?>
+<odoo>
+		<record id="attandace_mail_template" model="mail.template">
+				<field name="name">Attandance: Mail the template to teacher</field>
+				<field name="model_id" ref="school_erp.model_school_attandance"/>
+				<field name="email_from">{{user.email}}</field>
+				<field name="email_to">{{object.teacher_id.email}}</field>
+				<field name="subject">Attandance Timetable Requested for</field>
+				<field name="body_html" type="html">
+					<div>
+						<p>Dear <t t-out="object.teacher_id.name"/></p>
+						<p>Today's Attandace </p>
+					</div>
+				</field>
+			<field name="report_template" ref="school_erp.report_school_attandance_template"/>
+<field name="report_name">${school.attandance}_attandance}
+</field>
+		</record>
+</odoo> -->
+<odoo>
+	<record id="attandace_mail_template" model="mail.template">
+		<field name="name">Attendance: Mail the template to teacher</field>
+		<field name="model_id" ref="school_erp.model_school_attandance"/>
+		<field name="email_from">${user.email|safe}</field>
+		<field name="email_to">${object.teacher_id.email|safe}</field>
+		<field name="subject">Attendance Report for ${object.name}</field>
+		<field name="report_template" ref="school_erp.report_school_attandance_template"/>
+		<field name="report_name">${object.name}</field>
+
+		<field name="body_html" type="html">
+			<div>
+				<p>Dear ${object.teacher_id.name},</p>
+				<p>Please find attached today's attendance report.</p>
+			</div>
+		</field>
+	</record>
+</odoo>

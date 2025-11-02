@@ -1,0 +1,9 @@
+<odoo>
+	<data>
+		<record id="menu_sale_order_website" model="website.menu">
+			<field name="name">Create Sale Order</field>
+			<field name="url">/create-sale-order</field>
+			<field name="parent_id" ref="website.main_menu"/>
+		</record>
+	</data>
+</odoo>

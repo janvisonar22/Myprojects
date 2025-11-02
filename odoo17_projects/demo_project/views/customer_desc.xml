@@ -1,0 +1,36 @@
+<odoo>
+	<record id="view_customer_desc_tree" model="ir.ui.view">
+		<field name="name">customer.desc.tree</field>
+		<field name="model">customer.desc</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="name"/>
+				<field name="description"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="view_customer_desc_form" model="ir.ui.view">
+		<field name="name">customer.desc.form</field>
+		<field name="model">customer.desc</field>
+		<field name="arch" type="xml">
+			<form>
+				<sheet>
+					<group>
+						<field name="name"/>
+						<field name="description"/>
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="action_customer_desc" model="ir.actions.act_window">
+		<field name="name">Customer Descriptions</field>
+		<field name="res_model">customer.desc</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem id="customer_desc_parent" name="Demo" />
+	<menuitem id="customer_desc_child" name="Customer" action="action_customer_desc" parent="customer_desc_parent"/>
+</odoo>

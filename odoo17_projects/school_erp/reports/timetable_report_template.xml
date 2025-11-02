@@ -1,0 +1,134 @@
+<!-- <odoo>
+	<template id="report_school_timetable_template">
+		<t t-call="web.html_container">
+			<t t-call="web.external_layout">
+				<t t-foreach="docs" t-as="o">
+					<div class="page">
+					   <h2>TimeTable </h2>
+						<table style="width:100%">
+							<tr>
+								<td>No: <t t-esc="o.name"/></td>
+								<td style="text-align:center;">Day: <t t-esc="o.day"/></td>
+							</tr>
+							<tr>
+								<td>From date: <t t-esc="o.from_date"/></td>
+								 <td style="text-align:center;">To date: <t t-esc="o.to_date"/></td>
+							</tr>
+							<tr>
+								<td>Class Teacher: <t t-esc="o.teacher_id.name"/></td>
+							</tr>
+
+						</table>
+					</div>
+				</t>
+			</t>
+		</t>
+
+	</template>
+</odoo> -->
+
+<!-- 
+<odoo>
+	<template id="report_school_timetable_template">
+		<t t-call="web.html_container">
+			<t t-call="web.external_layout">
+				<t t-foreach="docs" t-as="o">
+					<div class="page">
+						<h2>TimeTable</h2>
+						<br>
+						</br>
+						<div style="display: flex; justify-content: space-between; width: 100%;">
+							<div>
+								<p><strong>No:</strong> <t t-esc="o.name"/></p>
+								<p><strong>From date:</strong> <t t-esc="o.from_date"/></p>
+								<p><strong>Class Teacher:</strong> <t t-esc="o.teacher_id.name"/></p>
+							</div>
+							<div style="text-align: right;">
+								<p><strong>Day:</strong> <t t-esc="o.day"/></p>
+								<p><strong>To date:</strong> <t t-esc="o.to_date"/></p>
+							</div>
+						</div>
+
+
+					</div>
+				</t>
+			</t>
+		</t>
+	</template>
+</odoo>
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<odoo>
+	<template id="report_school_timetable_template">
+		<t t-call="web.html_container">
+			<t t-call="web.external_layout">
+				<t t-foreach="docs" t-as="o">
+					<div class="page">
+						<h2>TimeTable</h2>
+						<br/>
+
+						<!-- Header Information -->
+						<div style="display: flex; justify-content: space-between; width: 100%;">
+							<div>
+								<p><strong>No:</strong> <t t-esc="o.name"/></p>
+								<p><strong>From date:</strong> <t t-esc="o.from_date"/></p>
+								<p><strong>Class Teacher:</strong> <t t-esc="o.teacher_id.name"/></p>
+								<p><strong>To date:</strong> <t t-esc="o.to_date"/></p>
+
+							</div>
+						</div>
+
+						<!-- Timetable Lines Table -->
+						<br/>
+						<table class="table table-sm" style="width:100%; border-collapse: collapse;" border="1">
+							<thead style="background-color: #f0f0f0;">
+								<tr>
+									<th style="padding: 5px;">Period</th>
+									<th style="padding: 5px;">Days</th>
+									<th style="padding: 5px;">From Time</th>
+									<th style="padding: 5px;">To Time</th>
+									<th style="padding: 5px;">Subject</th>
+									<th style="padding: 5px;">Teacher</th>
+								</tr>
+							</thead>
+							<tbody>
+								<div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px;">
+
+								<t t-foreach="o.timetable_line_ids" t-as="line">
+									<tr>
+										<td style="padding: 5px;"><t t-esc="line.class_timing"/></td>
+										<td style="padding: 5px;"><t t-esc="line.day"/></td>
+
+										<td style="padding: 5px;"><t t-esc="line.from_time"/></td>
+										<td style="padding: 5px;"><t t-esc="line.to_time"/></td>
+										<td style="padding: 5px;"><t t-esc="line.subject_id.name"/></td>
+										<td style="padding: 5px;"><t t-esc="line.teacher_id.name"/></td>
+									</tr>
+								</t>
+							</div>
+							</tbody>
+						</table>
+
+					</div>
+				</t>
+			</t>
+		</t>
+	</template>
+</odoo>

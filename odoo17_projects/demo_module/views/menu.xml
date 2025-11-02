@@ -1,0 +1,13 @@
+<odoo>
+    <menuitem id="hotel_menu_root" name="Hotel"/>
+
+    <menuitem id="hotel_room_menu" name="Rooms" parent="hotel_menu_root" action="action_hotel_room"/>
+
+    <menuitem id="hotel_room_inside1" name="Contacts" parent="hotel_room_menu" action="action_contact_book"/>
+
+    <!-- <menuitem id="hotel_room_inside2" name="Hotel Count" parent="hotel_room_menu" action="action_hotel_wizard"/> -->
+
+    <menuitem id="hotel_count" name="Hotel Count" parent="hotel_menu_root" action="action_hotel_wizard"/>
+    <menuitem id="menu_demo_sales_purchase" name="Partner Record" parent="hotel_menu_root" action="action_sales_purchase_details_wizard"/>
+
+</odoo>

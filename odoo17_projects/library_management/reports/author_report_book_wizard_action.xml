@@ -1,0 +1,11 @@
+ <odoo>
+   <record id="action_report_author_book_view" model="ir.actions.report">
+		<field name="name">Author Book Report</field>
+		<field name="model">author.report.book.wizard</field>
+	   <field name="report_type">qweb-pdf</field>
+	   <field name="report_name">library_management.report_author_book_template</field>
+	   <field name="report_file">library_management.report_author_book_template</field>
+		<field name="binding_model_id"  ref="library_management.model_author_report_book_wizard"/>
+		<field name="binding_type">report</field>
+   </record>
+</odoo>

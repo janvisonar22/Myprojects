@@ -1,0 +1,10 @@
+<odoo>
+	<menuitem id="student_profile_main_menu"
+							name="Profile"
+							sequence="99"/>
+
+		<!-- <menuitem id="school_menu_child"
+							name="Custom Import"
+							parent="scool_erp_main_menu"
+							sequence="99"/> -->
+</odoo>

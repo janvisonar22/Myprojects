@@ -1,0 +1,15 @@
+<odoo>
+	<template id="website_bio" name="Biography">
+		<t t-call="website.layout">
+			<div class="oe-structure">
+				<div class ="container">
+					<t t-foreach="bio_records" t-as="bio">
+						<center><h3 t-field="bio.name"/>
+						<div t-field="bio.bio"/>
+						<div t-field="bio.date" t-options='{"widget":"date"}'/></center>
+					</t>
+				</div>
+			</div>
+		</t>
+	</template>
+</odoo>

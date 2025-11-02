@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="purchase_dashboard.PurchaseCard">
+        <div style="background-color:#990000;" class="py-3 text-odoo text-center">
+            <h1>PURCHASE DASHBOARD</h1>
+            <div style="background-color: #ffcccc;">
+                <h5>No. of Purchase Orders in Different States</h5>
+                <table class="table table-hover">
+                    <thead> 
+                        <tr><th>STATE</th><th>COUNT</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>RFQ</td><td><t t-esc="props.rfq"/></td></tr>
+                        <tr><td>RFQ SENT</td><td><t t-esc="props.rfq_sent"/></td></tr>
+                        <tr><td>To Approve</td><td><t t-esc="props.to_approve"/></td></tr>
+                        <tr><td>Purchase</td><td><t t-esc="props.purchase"/></td></tr>
+                        <tr><td>Done</td><td><t t-esc="props.done"/></td></tr>
+                        <tr><td>Cancel</td><td><t t-esc="props.cancel"/></td></tr>
+                        <tr><td>Total</td><td><t t-esc="props.purchase_order_count"/></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </t>
+</templates>
+<!-- <?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+	<t t-name="purchase_dashboard.PurchaseCard" owl="1" style="background-color:#990000;" class="py-3 text-odoo text-center">
+		<h1> PURCHASE DASHBOARD</h1>
+		<div style="background-color: #ffcccc;">
+			<h5>No.of Purchase Orders in different states</h5>
+			<table class="table table-hover">
+				<thead> 
+					<tr><th>STATE </th><th>COUNT</th></tr>
+				</thead>
+
+				<tbody>
+					<tr>
+						<td>RFQ</td><td><t t-esc="props.rfq"/></td>
+					</tr>
+					<tr>
+						<td>RFQ SENT</td><td><t t-esc="props.rfq_sent"/></td>
+					</tr>
+					<tr>
+						<td>To Approve</td><td><t t-esc="props.to_approve"/></td>
+					</tr>
+					<tr>
+						<td>Purchase</td><td><t t-esc="props.purchase"/></td></td>
+					</tr>
+					<tr>
+						<td>Done</td><td><t t-esc="props.done"/></td>
+					</tr>
+					<tr>
+						<td>Cancel</td><td><t t-esc="props.cancel"/></td>
+					</tr>
+					<tr>
+						<td>Total</td><td><t t-esc="props.purchase_order_count"/></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</t>
+</templates> -->

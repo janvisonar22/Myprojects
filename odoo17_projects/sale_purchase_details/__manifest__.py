@@ -1,0 +1,30 @@
+{
+	'name' : 'Sale And Purchase Details',
+	'version' : '17.0',
+	'summary': 'A dashboard and reporting module for Sale and Purchase details.',
+    'author': 'Author1',
+    'website': 'https://www.author1.com',
+    'category': 'Sales/Purchase',
+    'license': 'LGPL-3',
+	'author' : 'Author1',
+	'website' : 'www.author1.com',
+	'depends' : ['base','contacts','sale','purchase','report_xlsx'],
+	'data': [
+		'security/ir.model.access.csv',
+		'wizards/sale_purchase_details_view.xml',
+		'reports/sale_purchase_report_action.xml',
+		'reports/sale_purchase_report_xlsx_action.xml',
+		# 'views/sale_purchase_dashboard.xml',
+		# 'views/sale_dashboard.xml',
+		'views/purchase_dashboard.xml',
+        'views/purchase_dashboard_template.xml',
+	    # "views/purchase_dashboard_assets.xml",
+    ],
+    #  'assets': {  # OPTIONAL: Use ONLY if you need ir.asset
+    #     'web.assets_backend': [
+    #         'sale_purchase_details/static/src/js/purchase_dashboard.js',
+    #     ],
+    # },
+	'installable':True,
+	'application':True,
+}

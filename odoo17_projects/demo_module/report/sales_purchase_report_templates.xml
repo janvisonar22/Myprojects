@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<record id="action_sales_purchase_xlsx_report" model="ir.actions.report">
+	<field name="name">Sales Purchase XLSX Report</field>
+	<field name="model">sales.purchase.details.wizard</field>
+	<field name="report_type">xlsx</field>
+	<field name="report_name">demo_module.report_sales_purchase_xlsx</field>
+</record>
+ 
+</odoo>
+
+
+<!-- 
+
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="action_sales_purchase_xlsx_report" model="ir.actions.report">
+        <field name="name">Sales and Purchase Report</field>
+        <field name="model">sales.purchase.details.wizard</field>  
+        <field name="report_type">xlsx</field>
+        <field name="report_name">sale_purchase_details.report_sales_purchase_xlsx</field>
+        <field name="report_file">sale_purchase_details.report_sales_purchase_xlsx</field>
+        <field name="binding_model_id" ref="model_sales_purchase_details_wizard"/>
+        <field name="binding_type">report</field>
+        <field name="print_report_name">'Sales_Purchase_Report_%s' % (object.start_date)</field>
+    </record>
+</odoo> -->

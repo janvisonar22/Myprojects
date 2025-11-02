@@ -1,0 +1,21 @@
+<odoo>
+	<menuitem id="menu_library_root"
+							name="Library "
+								sequence="99"/>
+	<menuitem id="menu_library_book"
+	          name="Books"
+	          parent="menu_library_root"
+	          action="action_library_book"/>
+	<menuitem id="menu_library_author"
+			  name="Author"
+			  parent="menu_library_root"
+			  action="action_library_author"/>
+	<menuitem id="menu_wizard_authors"
+			  name="Reports"
+			  parent="menu_library_root"
+			  action="action_author_report_book_wizard"/>
+
+</odoo>
+
+
+

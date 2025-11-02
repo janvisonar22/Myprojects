@@ -1,0 +1,33 @@
+{
+	'name': 'School ERP',
+	'version': '17.0',
+	'category': 'A simple odoo17 module',
+	'summary': 'A custom module for Odoo 17',
+	'description': 'This module provides custom functionality for Odoo 17.',
+	'depends': ['base','sale','purchase','mail'],
+	'data': [
+		'security/ir.model.access.csv',
+		'data/sequence.xml',
+		'data/attandace_email_template.xml',
+		'data/cron.xml',
+		'views/res_teacher_view.xml',
+		'views/res_student_view.xml',
+		'views/student_type_views.xml',
+		'views/teacher_designation_view.xml',
+		'views/teacher_type_view.xml',
+		'views/subject_view.xml',
+		'views/timetable_view.xml',
+		'views/standard_view.xml',
+		'views/school_attandance.xml',
+		'views/menu.xml',
+		'reports/timetable_report.xml',
+		'reports/timetable_report_template.xml',
+		'reports/attandance_report.xml',
+		'reports/attandance_report_template.xml',
+	],
+	
+
+	'installable': True,
+	'application': True,
+	'license': 'LGPL-3',  
+}

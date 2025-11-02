@@ -1,0 +1,11 @@
+<odoo>
+    <record id="ir_cron_send_mail" model="ir.cron">
+    <field name="name">Send to the mail</field>
+    <field name="model_id" ref="school_erp.model_school_attandance"/>
+    <field name="state">code</field>
+    <field name="code">model.cron_create_mail()</field>
+    <field name="interval_number">1</field>
+    <field name="interval_type">days</field>
+    <field name="active" eval="True"/>
+</record>
+</odoo>

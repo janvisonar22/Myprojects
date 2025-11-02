@@ -1,0 +1,12 @@
+<odoo>
+    <record id="action_school_timetable_report" model="ir.actions.report">
+        <field name="name">TimeTable</field>
+        <field name="model">school.timetable</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">school_erp.report_school_timetable_template</field>
+        <field name="report_file">school_erp.report_school_timetable_template</field>
+        <field name="binding_model_id" ref="model_school_timetable"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>
+

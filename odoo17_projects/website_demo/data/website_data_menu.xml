@@ -1,0 +1,9 @@
+<odoo>
+	<data noupdate="1">
+		<record id="menu-bio" model="website.menu">
+			<field name="name">Biography</field>
+			<field name="url">/biography</field>
+			<field name="parent_id" ref="website.main_menu"/>
+		</record>
+	</data>
+</odoo>

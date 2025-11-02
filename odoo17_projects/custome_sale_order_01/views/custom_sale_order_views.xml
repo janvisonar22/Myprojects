@@ -1,0 +1,38 @@
+<odoo>
+ <!--    <record id="view_custom_order_form" model="ir.ui.view">
+        <field name="name">custom.order.form</field>
+        <field name="model">custom.order</field>
+        <field name="arch" type="xml">
+            <form string="Custom Order">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="partner_id"/>
+                        <field name="date_order"/>
+                        <field name="state"/>
+                    </group>
+                    <notebook>
+                        <page string="Order Lines">
+                            <field name="order_line">
+                                <tree editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="name"/>
+                                    <field name="product_uom_qty"/>
+                                    <field name="price_unit"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record> -->
+<!-- actions.xml -->
+<record id="action_custom_record_view" model="ir.actions.act_window">
+    <field name="name">Custom Records</field>
+    <field name="res_model">custom.record</field>
+    <field name="view_mode">tree,form</field>
+    <field name="domain">[('sale_order_id', '=', active_id)]</field>
+</record>
+
+</odoo>

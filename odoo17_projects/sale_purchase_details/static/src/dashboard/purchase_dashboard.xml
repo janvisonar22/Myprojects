@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="PurchaseDashboardTemplate">
+        <div class="o_purchase_dashboard">
+            <h2>This is Purchase Dashboard</h2>
+        </div>
+    </template>
+</odoo>
+<!-- <?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="purchase_dashboard.PurchaseDashboard">
+        <div class="container">
+            <h1>Purchase Dashboard</h1>
+        </div>
+    </t>
+</templates>
+ -->
+<!-- <?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="purchase_dashboard.PurchaseDashboard">
+        <div class="container">
+            <h2 class="text-center my-3">Purchase Dashboard</h2>
+            <div class="row">
+                <t t-foreach="props.cards" t-as="card">
+                    <div class="col-md-4">
+                        <t t-call="purchase_dashboard.PurchaseCard">
+                            <t t-set="rfq" t-value="card.rfq"/>
+                            <t t-set="rfq_sent" t-value="card.rfq_sent"/>
+                            <t t-set="to_approve" t-value="card.to_approve"/>
+                            <t t-set="purchase" t-value="card.purchase"/>
+                            <t t-set="done" t-value="card.done"/>
+                            <t t-set="cancel" t-value="card.cancel"/>
+                            <t t-set="purchase_order_count" t-value="card.purchase_order_count"/>
+                        </t>
+                    </div>
+                </t>
+            </div>
+        </div>
+    </t>
+</templates> -->
+<!-- <?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+	<t t-name="sale_purchase_details.PurchaseDashboard" owl="1" >
+		<PurchaseCard 
+			purchase_order_count="purchase_order_count.all_purchase_order" 
+			rfq="purchase_order_count.rfq" 
+			rfq_sent="purchase_order_count.rfq_sent"
+			to_approve="purchase_order_count.to_approve"
+			purchase="purchase_order_count.purchase"
+			done="purchase_order_count.done"
+			cancel="purchase_order_count.cancel"
+		/>
+	</t>
+</templates> -->

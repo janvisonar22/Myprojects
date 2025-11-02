@@ -1,0 +1,22 @@
+<odoo>
+	<record id="view_sale_order_form_xlsx" model="ir.ui.view">
+		<field name="name">sale.order.form.xlsx.button</field>
+		<field name="model">sale.order</field>
+		<field name="inherit_id" ref="sale.view_order_form"/>
+		<field name="arch" type="xml">
+			<!-- Insert button after 'action_confirm' button -->
+			<xpath expr="//header/button[@name='action_confirm']" position="after">
+				<button name="action_download_xlsx"
+						string="Download XLSX"
+						type="object"
+						class="btn-primary"
+						icon="fa-download"/>
+			</xpath>
+						<xpath expr="/form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='name']" position="replace">
+				<field name="name"/>
+			</xpath>
+
+		</field>
+	</record>
+</odoo>
+

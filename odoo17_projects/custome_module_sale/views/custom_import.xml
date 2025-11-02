@@ -1,0 +1,37 @@
+<odoo>
+		<field name="model">custom.import</field>
+		<field name="arch" type="xml">
+			<form string="Custom import">
+				<sheet>
+					<group>
+					   <field name="name"/>
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+	<record id="custom_import_action" model="ir.actions.act_window">
+		<field name="name">custom import</field>
+		<field name="res_model">custom.import</field>
+		<field name="view_mode">form</field>
+	</record>
+</odoo>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

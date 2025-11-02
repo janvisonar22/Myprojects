@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="view_form_school_attandance" model="ir.ui.view">
+		<field name="name">school.attandance.form</field>
+		<field name="model">school.attandance</field>
+		<field name="arch" type="xml">
+			<form string="School Attendance">
+				<sheet>
+				<group>
+				<group>
+					<field name="teacher_id"/>
+					<field name="standard_id"/>
+					<field name="timetable_id"/>
+				</group>
+				<group>
+					<field name="from_time"/>
+					<field name="to_time"/>
+				</group>
+			</group>
+			<notebook>
+                    <page string="Students">
+                        <field name="student_line_ids">
+                            <tree editable="bottom">
+                                <field name="student_id"/>
+                                <field name="present" widget="boolean_toggle"/>
+
+                            </tree>
+                        </field>
+                    </page>
+
+
+			</notebook>
+		</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="view_tree_school_attandance" model="ir.ui.view">
+		<field name="name">school.attandance.tree</field>
+		<field name="model">school.attandance</field>
+		<field name="arch" type="xml">
+			<tree string="School Attendance">
+				<field name="teacher_id"/>
+				<field name="standard_id"/>
+
+			</tree>
+		</field>
+	</record>
+
+	<record id="action_school_attandance" model="ir.actions.act_window">
+		<field name="name">Attendance</field>
+		<field name="res_model">school.attandance</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+</odoo>

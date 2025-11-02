@@ -1,0 +1,55 @@
+<!-- <odoo>
+	<record id="view_sale_order_xlsx_wizard_form" model="ir.ui.view">
+		<field name="name">sale.order.xlsx.wizard.form</field>
+		<field name="model">sale.order.xlsx.wizard</field>
+		<field name="arch" type="xml">
+			<form string="Download XLSX">
+				<group>
+					<field name="file_name" readonly="1"/>
+					<field name="attachment_id"/>
+				</group>
+				<footer>
+					<button string="Download" type="object" name="action_download_file" class="btn-primary"/>
+					<button string="Cancel" special="cancel" class="btn-secondary"/>
+				</footer>
+			</form>
+		</field>
+	</record>
+
+	<record id="action_sale_order_xlsx_wizard" model="ir.actions.act_window">
+		<field name="name">Sale Order XLSX Wizard</field>
+		<field name="res_model">sale.order.xlsx.wizard</field>
+		<field name="view_mode">form</field>
+		<field name="target">new</field>
+	</record>
+</odoo>
+ -->
+
+
+<odoo>
+    <!-- Wizard Form View -->
+    <record id="view_sale_order_xlsx_wizard_form" model="ir.ui.view">
+        <field name="name">sale.order.xlsx.wizard.form</field>
+        <field name="model">sale.order.xlsx.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Download XLSX">
+                <group>
+                    <field name="file_name" readonly="1"/>
+                    <field name="attachment_id" readonly="1"/>
+                </group>
+                <footer>
+                    <button string="Download" type="object" name="action_download_file" class="btn-primary"/>
+                    <button string="Cancel" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Wizard Action -->
+    <record id="action_sale_order_xlsx_wizard" model="ir.actions.act_window">
+        <field name="name">Sale Order XLSX Wizard</field>
+        <field name="res_model">sale.order.xlsx.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

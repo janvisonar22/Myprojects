@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="view_sales_purchase_details_wizard" model="ir.ui.view">
+		<field name="name">sales.purchase.details.wizard.form</field>
+		<field name="model">sales.purchase.details.wizard</field>
+		<field name="arch" type="xml">
+			<form string="Sales and Purchase Details">
+				<group>
+					<field name="start_date"/>
+					<field name="end_date"/>
+					<field name="partner_id"/>
+				</group>
+				<footer>
+					<button name="action_generate_report" type="object" string="Generate PDF Report" class="btn-primary"/>
+					<button name="action_generate_xlsx_report" type="object" string="Generate XLSX Report" class="btn-primary"/>
+					<button string="Cancel" class="btn-secondary" special="cancel"/>
+				</footer>
+			</form>
+		</field>
+	</record>
+
+	<record id="action_sales_purchase_details_wizard" model="ir.actions.act_window">
+		<field name="name">Sales and Purchase Details</field>
+		<field name="res_model">sales.purchase.details.wizard</field>
+		<field name="view_mode">form</field>
+		<field name="target">new</field>
+	</record>
+
+<!-- 	<menuitem id="menu_demo_root" name="Reports"/>
+	<menuitem id="menu_demo_sales_purchase" name="Sales & Purchase Report" parent="menu_demo_root" action="action_sales_purchase_details_wizard"/>
+ --></odoo>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Tree View -->
+    <record id="view_contact_book_tree" model="ir.ui.view">
+        <field name="name">contact.book.tree</field>
+        <field name="model">contact.book</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_contact_book_form" model="ir.ui.view">
+        <field name="name">contact.book.form</field>
+        <field name="model">contact.book</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_contact_book" model="ir.actions.act_window">
+        <field name="name">Contact Book</field>
+        <field name="res_model">contact.book</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

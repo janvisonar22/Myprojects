@@ -1,0 +1,80 @@
+<odoo>
+	<record id="view_author_search" model="ir.ui.view">
+		<field name="name">library.author.search</field>
+		<field name="model">library.author</field>
+		<field name="arch" type="xml">
+			<search>
+				<field name="name" string="Name"/>
+				<field name="birth_date" string="Birth date"/>
+			</search>
+
+
+		</field>
+		</record>
+
+
+
+
+	<record id="view_library_author_tree" model="ir.ui.view">
+		<field name="name">library.author.tree</field>
+		<field name="model">library.author</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="name"/>
+				<field name="birth_date"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="view_library_author_form" model="ir.ui.view">
+		<field name="name">library.author.form</field>
+		<field name="model">library.author</field>
+		<field name="arch" type="xml">
+			<form>
+				<header>
+					<!-- action type button -->
+					<button class="btn-primary" string="Create books" type='action' name="%(sale_crm.sale_action_quotations_new)d"/>
+<!-- for email -->
+				<button class="oe-highlight" string="Send Email" type='object' name="action_send_mail"/>
+<!-- for notification -->
+				<button class="oe-highlight" string="Notification" type='object' name="action_send_notification"/>
+
+				<button name="action_confirm" string="confirm" type='object' class="btn-primary" invisible="state=='done' "/>
+
+
+				<field name="state" widget="statusbar"
+					statusbar_visible="draft,done"/>
+
+
+
+				</header>
+				<sheet>
+				<group>
+					<field name="partner_id"/>
+					<field name="name"/>
+					<field name="birth_date"/>
+					<!-- <field name="book_author_ids" widget="many2many_tags" /> -->
+				</group>
+				<notebook>
+					<page string="Books">
+						<field name="book_ids">
+							<tree editable="bottom">
+								<field name="title"/>
+								<field name="publish_date"/>
+								<field name="pages"/>
+							</tree>
+						</field>
+					</page>
+				</notebook>
+			</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="action_library_author" model="ir.actions.act_window">
+		<field name="name">Authors</field>
+		<field name="res_model">library.author</field>
+		<field name="view_mode">tree,form</field>
+		<field name="search_view_id" ref="view_author_search"/>
+	</record>
+</odoo>

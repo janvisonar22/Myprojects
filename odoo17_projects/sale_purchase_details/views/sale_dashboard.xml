@@ -1,0 +1,22 @@
+<odoo>
+    <template id="empty_dashboard_template">
+        <div class="o_dashboard_container">
+            <h2>My Empty Dashboard</h2>
+        </div>
+    </template>
+</odoo>
+
+<!-- <?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+	<templates id="template_dashboard" xml:space="preserve">
+		<t t-name="sale_purchase_details.SaleDashboard">
+			<div class="container">
+					<center>
+						<h1 style="margin:20px;">
+							Sale Dashboard</h1>
+					</center>
+			</div>
+		</t>
+	</templates>
+</odoo>
+ -->

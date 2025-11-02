@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Action Definition (MUST come before menuitem) -->
+    <record id="action_purchase_dashboard" model="ir.actions.act_window">
+        <field name="name">Purchase Dashboard</field>
+        <field name="res_model">purchase.dashboard</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem id="menu_purchase_dashboard"
+              name="Purchase Dashboard"
+              parent="purchase.menu_purchase_root"
+              sequence="1"
+              action="action_purchase_dashboard"/>
+</odoo>
+
+<!-- <?xml version="1.0" encoding="UTF-8"?>
+    <odoo>
+        <record id="action_purchase_dashboard" model="ir.actions.act_window">
+            <field name="name">Purchase Dashboard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">purchase.dashboard</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="help" type="html">
+                <p>
+                    Welcome to the Purchase Dashboard. This section provides insights into purchase orders and vendor performance.
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_purchase_dashboard"
+                  name="Purchase Dashboard"
+                  parent="purchase.menu_purchase_root"
+              action="action_purchase_dashboard"/>
+</odoo>
+ -->
+<!-- <odoo>
+    <data>
+
+        <record id="action_purchase_dashboard" model="ir.actions.act_window">
+            <field name="name">Purchase Dashboard</field>
+            <field name="res_model">purchase.order</field>
+            <field name="view_mode">pivot,graph,tree</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No data available for the dashboard yet.
+                </p>
+            </field>
+        </record>
+
+
+        <menuitem id="menu_purchase_dashboard"
+                  name="Purchase Dashboard"
+                  parent="purchase.menu_purchase_root"
+                  action="sale_purchase_details.action_purchase_dashboard"/>
+
+    </data>
+</odoo>
+ -->
+<!-- <?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_purchase_dashboard" model="ir.actions.client">
+        <field name="name">Purchase Dashboard</field>
+        <field name="tag">purchase_dashboard</field>
+    </record>
+    
+    <menuitem id="menu_purchase_dashboard" name="Purchase Dashboard" parent="purchase.menu_purchase_root" action="action_purchase_dashboard"/>
+</odoo> -->
+
+<!-- <odoo>
+    <menuitem id="purchase_dashboard_menu" 
+              name="Purchase Dashboard" 
+              parent="purchase.menu_purchase_root" 
+              action="action_purchase_dashboard"/>
+    
+    <record id="action_purchase_dashboard" model="ir.actions.client">
+        <field name="name">Purchase Dashboard</field>
+        <field name="tag">purchase_dashboard</field>
+    </record>
+</odoo> -->
+<!-- <?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="action_dashboard_purchase" model="ir.actions.client">
+        <field name="name">Purchase Dashboard</field>
+        <field name="tag">purchase_dashboard</field> 
+    </record>
+
+    <menuitem id="menu_purchase_dashboard" name="Purchase Dashboard" action="action_dashboard_purchase" parent="purchase.menu_purchase_root"/>
+</odoo>
+ -->

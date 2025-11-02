@@ -1,0 +1,10 @@
+<odoo>
+	<template id="custom_portal_template" name="Custom Portal Page">
+		<t t-call="website.layout">
+			<div class="container mt-4">
+				<h2>Welcome to Your Custom Portal</h2>
+				<p><t t-esc="custom_data"/></p>
+			</div>
+		</t>
+	</template>
+</odoo>

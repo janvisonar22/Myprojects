@@ -1,0 +1,13 @@
+<odoo>
+    <record id="action_school_attandance_report" model="ir.actions.report">
+        <field name="name">Attandance</field>
+        <field name="model">school.attandance</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">school_erp.report_school_attandance_template</field>
+        <field name="report_file">school_erp.report_school_attandance_template</field>
+        <field name="binding_model_id" ref="model_school_attandance"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>
+
+<!-- print action -->

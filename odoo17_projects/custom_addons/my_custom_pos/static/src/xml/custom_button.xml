@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- <templates id="template" xml:space="preserve">
+
+	<t t-name="pos_sale_order.SaleOrderButton">
+		<button class="control-button btn btn-light rounded-0 fw-bolder" t-on-click="() => this.click()">
+			<i class="fa fa-file-text-o me-1" role="img" aria-label="Sale Order" title="Sale Order"/>
+			Sale Order
+		</button>
+	</t>
+
+</templates>
+ -->
+<templates id="template" xml:space="preserve">
+    <t t-name="pos_sale_order.SaleOrderButton" owl="1">
+        <button class="control-button" t-on-click="onClick">
+            <i class="fa fa-shopping-cart"/> Create Sale Order
+        </button>
+    </t>
+</templates>

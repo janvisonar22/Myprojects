@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+	<record id="web_bio_view_mitchel" model="bio.website">
+		<field name="name">Mitchel</field>
+		<field name="bio">Demol</field>
+		<field name="date">2024-02-05</field>
+	</record>
+		<record id="web_bio_view_rose" model="bio.website">
+		<field name="name">Rose</field>
+		<field name="bio">demo2</field>
+		<field name="date">2024-05-05</field>
+	</record>
+	<record id="web_bio_view_joil" model="bio.website">
+		<field name="name">Joel</field>
+		<field name="bio">Demo3</field>
+		<field name="date">2024-09-05</field>
+	</record>
+
+</odoo>

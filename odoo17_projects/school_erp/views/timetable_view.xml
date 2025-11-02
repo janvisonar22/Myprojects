@@ -1,0 +1,74 @@
+<odoo>
+	<data noupdate="1">
+	<!-- Tree View -->
+	<record id="view_school_timetable_tree" model="ir.ui.view">
+		<field name="name">school.timetable.tree</field>
+		<field name="model">school.timetable</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="name"/>
+				<field name="standard"/>
+			</tree>
+		</field>
+	</record>
+
+	<!-- Form View -->
+	<record id="view_school_timetable_form" model="ir.ui.view">
+		<field name="name">school.timetable.form</field>
+		<field name="model">school.timetable</field>
+		<field name="arch" type="xml">
+			<form>
+				<sheet>
+					<group>
+						<field name="name"/>
+						<field name="standard"/>
+						<field name="from_date"/>
+						<field name="to_date"/>
+						<field name="teacher_id"/>
+						<!-- <field name="day"/> -->
+					</group>
+				<notebook>
+					<page string="Timetable Lines">
+						<field name="timetable_line_ids">
+							<tree editable="bottom">
+								<field name="day"/>
+
+								<field name="from_time" widget="float_time"/>
+								<field name="to_time" widget="float_time"/>
+								<field name="class_timing" readonly="1"/>
+								<field name="subject_id"/>
+								<field name="teacher_id"/>
+							</tree>
+
+						</field>
+					</page>
+					<page string="Students">
+						<field name="student_ids"/>
+						
+					</page>
+				</notebook>
+
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<!-- Action -->
+	<record id="action_school_timetable" model="ir.actions.act_window">
+		<field name="name">Timetable</field>
+		<field name="res_model">school.timetable</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+    <record id="ir_cron_auto_absent_marking" model="ir.cron">
+        <field name="name">Check the Student</field>
+        <field name="model_id" ref="school_erp.model_school_timetable"/>
+        <field name="state">code</field>
+        <field name="code">model.cron_create_attendance()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="active" eval="True"/>
+    </record>
+
+ </data>
+</odoo>

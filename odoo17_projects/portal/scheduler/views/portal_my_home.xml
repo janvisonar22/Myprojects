@@ -1,0 +1,27 @@
+<!-- <odoo>
+	<template id="custom_portal_my_home_inherit" inherit_id="portal.portal_my_home" priority="30">
+		<xpath expr="//div[@id='portal_my_home']//div[contains(@class, 'o_portal_wrap')]" position="inside">
+			<div class="o_portal_docs_entry">
+				<a href="/my/custom-portal" class="btn btn-secondary w-100 mb-2">
+					<i class="fa fa-star fa-fw"></i> Custom Portal
+				</a>
+			</div>
+		</xpath>
+	</template>
+</odoo>
+ -->
+
+<template id="portal_my_home_custom_module" name="Custom Portal Entries"
+          inherit_id="portal.portal_my_home" priority="30">
+    <xpath expr="//div[@id='portal_vendor_category']" position="after">
+        <div id="portal_custom_category">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="icon" t-value="'/scheduler/static/src/img/custom.svg'"/>
+                <t t-set="text">Track your Custom Portal Data</t>
+                <t t-set="title">My Custom Records</t>
+                <t t-set="url" t-value="'/my/custom'"/>
+                <t t-set="placeholder_count" t-value="'custom_count'"/>
+            </t>
+        </div>
+    </xpath>
+</template>
