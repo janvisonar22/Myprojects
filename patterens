@@ -1,0 +1,117 @@
+que:5:
+   * 
+  * * 
+ * * * 
+* * * * 
+
+
+
+
+
+ans::
+rows = 4
+for i in range(1, rows + 1):
+    print(' ' * (rows - i) + '* ' * i)
+
+or
+
+num = 4
+for i in range(1,num+1):
+    spaces = num-i
+    star = i
+    print(' '*spaces+'* '*star)
+
+
+que 6:
+      * 
+    * * 
+  * * * 
+* * * * 
+ans:
+num = 4
+for i in range(1,num+1):
+    spaces = num-i
+    star = i
+    print('  '*spaces+'* '*star)(here 3 spaces required)
+prograam code same but only difference between print '  ' (space)
+
+
+
+que 7:
+    * 
+   * * 
+  * * * 
+ * * * * 
+  * * * 
+   * * 
+    * 
+ans
+num = 4
+for i in range(1,num+1):
+    print(' '*(num-i),'* '*i)(here 2 space required)
+for i in range(num-1,0,-1):
+    print(' '*(num-i),'* '*i)
+    
+    
+que 8:
+1
+1 2
+1 2 3
+1 2 3 4
+
+ans:
+num = 4
+for i in range(1,num+1):
+    for j in range(1,i+1):
+        print(j, end=" ")
+    print()
+
+que 9:
+1 
+2 2 
+3 3 3 
+4 4 4 4
+ans:
+num = 4
+for i in range(1,num+1):
+    for j in range(1,i+1):
+        print(i, end=" ")
+    print()
+
+
+que 10:
+1 
+2 6 
+3 7 10 
+4 8 11 13 
+5 9 12 14 15 
+
+ans::::
+n = 5
+for i in range(1,n+1):
+    num = i
+    diff = n-1
+    for j in range(1,i+1):
+        print(num,end=" ")
+        num+=diff
+        diff -=1
+    print()
+
+logic :
+ Observations:
+It's a triangle with n rows.
+
+Each row starts with an increasing number (1 to n) as the first column.
+
+Next numbers are built by adding decreasing differences:
+
+Row 2: 2 → 6 (+4)
+
+Row 3: 3 → 7 (+4), 7 → 10 (+3)
+
+Row 4: 4 → 8 (+4), 8 → 11 (+3), 11 → 13 (+2)
+
+Row 5: 5 → 9 (+4), 9 → 12 (+3), 12 → 14 (+2), 14 → 15 (+1)
+
+here diff decrease 4 to 3 to 2 to 1
+
