@@ -1,0 +1,4 @@
+<odoo>
+    <menuitem id="menu_blog_root" name="Website Blog"/>
+    <menuitem id="menu_blog_posts" name="Blog Posts" parent="menu_blog_root" action="action_blog_posts"/>
+</odoo>

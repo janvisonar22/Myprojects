@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+    <!-- Top menu -->
+        <menuitem id="menu_library_root" name="Library" sequence="10"/>
+
+
+        <!-- Authors -->
+        <menuitem id="library_author_menu_child" name="Authors" parent="menu_library_root" action="action_library_author" sequence="1"/>
+    <!-- Actions and Views are referenced in separate view files -->
+    </data>
+</odoo>

@@ -1,0 +1,10 @@
+<odoo>
+
+
+  <menuitem id="menu_practice_demo_main_root" name="Custom Demo"/>
+  <menuitem id="menu_custom_practice_demo" parent="menu_practice_demo_main_root" action="action_custom_practice_demo" name="practice demo"/>
+
+
+
+
+</odoo>

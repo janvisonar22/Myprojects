@@ -1,0 +1,33 @@
+<odoo>
+
+
+
+  <record id="paperformat_a4_portrait" model="report.paperformat">
+        <field name="name">A4 Portrait</field>
+        <field name="format">A4</field>
+        <field name="orientation">Portrait</field>
+        <field name="default">True</field>
+        <field name="margin_top">20</field>
+        <field name="margin_bottom">20</field>
+        <field name="margin_left">15</field>
+        <field name="margin_right">15</field>
+    </record>
+
+      <record id="action_report_custom_purchase_order" model="ir.actions.report">
+        <field name="name">Custom Order PDF</field>
+        <field name="model">custom.practice.demo</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">custom_practice_demo.report_demo_order_document</field>
+        <field name="report_file">custom_practice_demo.report_demo_order_document</field>
+        <!-- <field name="print_report_name">'Purchase Order - %s' % (object.name)</field> -->
+
+      <field name="paperformat_id" ref="paperformat_a4_portrait"/>  <!-- Link here -->
+
+        <field name="binding_model_id" ref="model_custom_practice_demo"/>
+    </record>    
+
+
+
+
+
+</odoo>

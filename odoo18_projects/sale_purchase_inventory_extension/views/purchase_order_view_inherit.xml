@@ -1,0 +1,14 @@
+<odoo>
+    <record id="view_purchase_order_form_inherit_sale_link" model="ir.ui.view">
+        <field name="name">purchase.order.form.inherit.sale.link</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/group" position="inside">
+                <group>
+                <field name="sale_id" string="Sale Order" colspan="2" />
+            </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

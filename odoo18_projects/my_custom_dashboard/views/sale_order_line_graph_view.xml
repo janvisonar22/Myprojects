@@ -1,0 +1,23 @@
+<odoo>
+    <!-- Graph view for sale.order.line -->
+    <record id="view_sale_order_line_graph_dashboard" model="ir.ui.view">
+        <field name="name">sale.order.line.graph.dashboard</field>
+        <field name="model">sale.order.line</field>
+        <field name="arch" type="xml">
+            <graph string="Sale Order Lines" type="bar">
+                <field name="product_id" type="row"/>
+                <field name="price_total" type="measure"/>
+                <field name="order_id" type="col"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Action to open the graph -->
+    <record id="action_sale_order_line_graph_dashboard" model="ir.actions.act_window">
+        <field name="name">Sale Order Lines Graph</field>
+        <field name="res_model">sale.order.line</field>
+        <field name="view_mode">graph</field>
+        <field name="view_id" ref="view_sale_order_line_graph_dashboard"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

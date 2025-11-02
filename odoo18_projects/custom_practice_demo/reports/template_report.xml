@@ -1,0 +1,39 @@
+<odoo>
+  <template id="report_demo_order_document">
+    <t t-call="web.html_container">
+      <t t-call="web.external_layout">
+
+        <!-- Loop through records -->
+        <t t-foreach="docs" t-as="doc">
+
+          <div class="page">
+            <!-- Header -->
+            <header>
+              <h2 style="text-align:center;">Custom Practice Demo Report</h2>
+            <p><strong>Partner:</strong> <span t-esc="doc.partner_id.name or 'N/A'"/></p>
+          </header>
+            <hr/>
+
+            <!-- Body -->
+            <div class="mt16">
+              <p><strong>Name:</strong> <span t-esc="doc.name"/></p>
+              <p><strong>Value:</strong> <span t-esc="doc.value"/></p>
+              <p><strong>Description:</strong></p>
+              <p t-esc="doc.description"/>
+            </div>
+
+            <!-- Footer -->
+            <div class="footer mt32">
+              <hr/>
+              <p style="text-align:center; font-size:12px;">
+                Thank you for using our Custom Practice Demo report.
+              </p>
+            </div>
+          </div>
+
+        </t>
+
+      </t>
+    </t>
+  </template>
+</odoo>

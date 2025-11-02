@@ -1,0 +1,17 @@
+<odoo>
+
+
+ <menuitem id="menu_ecom_sale_website_root" name="Ecom Sale Website"/>
+    <menuitem id="menu_ecom_sale_website" 
+              parent="menu_ecom_sale_website_root" 
+              action="action_ecom_sale_website" 
+              name="Manage Records"/>
+
+
+
+        <menuitem id="menu_ecom_bidding_website" 
+              parent="menu_ecom_sale_website_root" 
+              action="action_ecom_sale_website_report_wizard" 
+              name="Reports"/>
+
+</odoo>

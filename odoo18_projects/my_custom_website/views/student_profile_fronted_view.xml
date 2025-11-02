@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	
+	<!-- Student Form Page -->
+	<template id="student_profile_form" name="Student Form Page">
+		<t t-call="website.layout">
+						<t t-set="head">
+				<style>
+					.btn-primary {
+						transition: all 0.3s ease; /* smooth effect */
+					}
+					.btn-primary:hover {
+						background-color: #0056b3; /* darker blue */
+						transform: scale(1.05);   /* thoda bada effect */
+						box-shadow: 0 4px 10px rgba(0,0,0,0.2); /* shadow effect */
+					}
+				</style>
+			</t>
+
+			<div class="container mt-5 d-flex justify-content-center">
+				<div class="card shadow-lg p-4 rounded" style="max-width: 500px; width: 100%;">
+					<div class="card-body">
+						<h3 class="card-title text-center mb-4">Student Registration</h3>
+						<form action="/student/profile/submit" method="post">
+							<input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+							<div class="mb-3">
+								<label class="form-label">Student Name</label>
+								<input type="text" name="name" class="form-control" required="1"/>
+							</div>
+							<div class="mb-3">
+								<label class="form-label">Roll Number</label>
+								<input type="text" name="roll_number" class="form-control" required="1"/>
+							</div>
+							<div class="mb-3">
+								<label class="form-label">Class</label>
+								<select name="class_name" class="form-select">
+									<option value="1">Class 1</option>
+									<option value="2">Class 2</option>
+									<option value="3">Class 3</option>
+									<option value="4">Class 4</option>
+									<option value="5">Class 5</option>
+								</select>
+							</div>
+							<div class="mb-3">
+								<label class="form-label">Date of Birth</label>
+								<input type="date" name="dob" class="form-control"/>
+							</div>
+							<div class="mb-3">
+								<label class="form-label">Gender</label>
+								<select name="gender" class="form-select">
+									<option value="male">Male</option>
+									<option value="female">Female</option>
+									<option value="other">Other</option>
+								</select>
+							</div>
+							<div class="mb-3">
+								<label class="form-label">Email</label>
+								<input type="email" name="email" class="form-control"/>
+							</div>
+							<div class="mb-3">
+								<label class="form-label">Phone</label>
+								<input type="text" name="phone" class="form-control"/>
+							</div>
+							<div class="mb-3">
+								<label class="form-label">Address</label>
+								<textarea name="address" class="form-control"></textarea>
+							</div>
+							<div class="d-grid">
+								<button type="submit" class="btn btn-primary">Save Student</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</t>
+	</template>
+
+	<!-- Thank You Page -->
+	<template id="student_profile_thanks" name="Student Profile Thanks">
+		<t t-call="website.layout">
+			<div class="container mt-5 d-flex justify-content-center">
+				<div class="card shadow-lg p-4 rounded text-center" style="max-width: 500px; width: 100%;">
+					<div class="card-body">
+						<h3>Thank You, <t t-esc="name"/>!</h3>
+						<p>Your profile has been submitted successfully.</p>
+						<a href="/student/profile" class="btn btn-secondary mt-3">Submit Another</a>
+					</div>
+				</div>
+			</div>
+		</t>
+	</template>
+
+</odoo>

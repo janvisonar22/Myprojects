@@ -1,0 +1,24 @@
+<odoo>
+
+    <record id="paperformat_a4_portrait" model="report.paperformat">
+        <field name="name">A4 Portrait</field>
+        <field name="format">A4</field>
+        <field name="orientation">Portrait</field>
+        <field name="default">True</field>
+        <field name="margin_top">20</field>
+        <field name="margin_bottom">20</field>
+        <field name="margin_left">15</field>
+        <field name="margin_right">15</field>
+    </record>
+
+    <record id="action_report_ecom_bidding_pdf" model="ir.actions.report">
+        <field name="name">Ecom Bidding Report</field>
+        <field name="model">ecom.sale.website</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">ecom_sale_website.report_ecom_bidding_pdf</field>
+        <field name="report_file">ecom_sale_website.report_ecom_bidding_pdf</field>
+
+                <field name="paperformat_id" ref="paperformat_a4_portrait"/>  <!-- Link here -->
+
+    </record>
+</odoo>

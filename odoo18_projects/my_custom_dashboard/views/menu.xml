@@ -1,0 +1,5 @@
+<odoo>
+
+    <menuitem id="menu_partner_dashboard" name="Partner Dashboard"
+                          action="action_partner_dashboard" sequence="1"/>
+</odoo>

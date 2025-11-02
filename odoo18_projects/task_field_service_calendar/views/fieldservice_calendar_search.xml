@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Inherit the Field Service Task search view to add filters -->
+    <record id="view_fieldservice_task_search_inherit_assigned_to" model="ir.ui.view">
+        <field name="name">fieldservice.task.search.assigned.to.filter</field>
+        <field name="model">fieldservice.task</field>
+        <field name="inherit_id" ref="field_service.view_fieldservice_task_search"/>
+        <field name="arch" type="xml">
+
+            <!-- Add 'Assigned To' and 'Team' filters -->
+            <xpath expr="//search" position="inside">
+                <filter string="Assigned To"
+                        name="assigned_to"
+                        domain="[]" context="{'group_by': 'user_id'}"/>
+                <filter string="Team"
+                        name="team"
+                        domain="[]" context="{'group_by': 'team_id'}"/>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

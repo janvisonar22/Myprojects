@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Security Category -->
+    <record model="ir.module.category" id="school_access">
+        <field name="name">School ERP Access</field>
+        <field name="description">User access levels for School ERP module</field>
+        <field name="sequence">10</field>
+    </record>
+
+    <!-- Teacher Group -->
+    <record id="group_school_erp_teacher" model="res.groups">
+        <field name="name">Teacher</field>
+        <field name="category_id" ref="school_access"/>
+    </record>
+
+    <!-- Student Group -->
+    <record id="group_school_erp_student" model="res.groups">
+        <field name="name">Student</field>
+        <field name="category_id" ref="school_access"/> 
+    </record>
+
+    <!-- Principal Group -->
+    <record id="group_school_erp_principal" model="res.groups">
+        <field name="name">Principal</field>
+        <field name="category_id" ref="school_access"/>
+    </record>
+</odoo>

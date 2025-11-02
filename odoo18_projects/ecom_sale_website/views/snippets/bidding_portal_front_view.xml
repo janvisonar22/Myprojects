@@ -1,0 +1,106 @@
+<odoo>
+
+    <!-- ===================================== -->
+    <!-- Portal Home Card for "My Products" -->
+    <!-- This adds a portal card on the home page showing product count -->
+    <!-- ===================================== -->
+    <template id="portal_my_home_custom_products"
+              inherit_id="portal.portal_my_home"
+              name="Custom Products Portal"
+              priority="25">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <div class="o_portal_index_card col-md-6 order-6">
+                <t t-call="portal.portal_docs_entry">
+                    <!-- Icon for the portal card -->
+                    <t t-set="icon" t-value="'/ecom_sale_website/static/src/img/bag.svg'"/>
+                    <!-- Title of the portal card -->
+                    <t t-set="title">My Products</t>
+                    <!-- Link to products page -->
+                    <t t-set="url" t-value="'/my/products'"/>
+                    <!-- Description under the title -->
+                    <t t-set="text">View all Bidding Products</t>
+                    <!-- Placeholder for dynamic product count -->
+                    <t t-set="placeholder_count" t-value="'product_count'"/>
+                </t>
+            </div>
+        </xpath>
+    </template>
+
+
+    <!-- ===================================== -->
+    <!-- Portal Products List Page -->
+    <!-- Displays all products in a table with their details -->
+    <!-- ===================================== -->
+    <template id="portal_my_products_template" name="My Products">
+        <t t-call="portal.portal_layout">
+            
+            <!-- Page Title -->
+            <t t-set="title">My Products</t>
+
+            <div class="container mt-4">
+                <h3 class="mb-3">Available Bidding Orders</h3>
+
+                <!-- Products Table -->
+                <table class="table table-bordered table-striped">
+                    <!-- Table Header -->
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Customer</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Suggestion Price</th>
+                            <th>State</th>
+                        </tr>
+                    </thead>
+
+                    <!-- Table Body -->
+                    <tbody>
+                        <!-- Loop through products -->
+                        <t t-foreach="products" t-as="p">
+                            <tr>
+                                <td t-esc="p.name"/>
+                                <td t-esc="p.customer_id.name"/>
+                                <td t-esc="p.customer_phone"/>
+                                <td t-esc="p.customer_email"/>
+                                <td t-esc="p.product_id.name"/>
+                                <td t-esc="p.price"/>
+                                <td t-esc="p.suggestion_price"/>
+                                <!-- State column with Bootstrap badge -->
+                                <td>
+                                    <span class="badge rounded-pill text-bg-info" t-esc="p.state"/>
+                                </td>
+                            </tr>
+                        </t>
+
+                        <!-- Message if no products found -->
+                        <t t-if="not products">
+                            <tr>
+                                <td colspan="8" class="text-center">No products found.</td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+
+                <!-- ===================================== -->
+                <!-- Pager for pagination (optional) -->
+                <!-- Uncomment and configure if you want page navigation -->
+               
+					<!-- <t t-if="pager">
+					    <ul class="pagination justify-content-center mt-3">
+					        <t t-foreach="range(1, pager['page_count']+1)" t-as="p">
+					            <li class="page-item" t-attf-class="page-item #{'active' if p==pager['page'] else ''}">
+					                <a class="page-link" t-att-href="pager['url'] + '?page=%s' % p" t-esc="p"/>
+					            </li>
+					        </t>
+					    </ul>
+					</t>
+					 -->               
+
+            </div>
+        </t>
+    </template>
+
+</odoo>

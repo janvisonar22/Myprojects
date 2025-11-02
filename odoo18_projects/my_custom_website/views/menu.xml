@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Main Menu -->
+    <menuitem id="main_menu" name="Student Profile" sequence="1"/>
+
+    <!-- Sub Menu that opens the Student Profile action -->
+    <menuitem id="menu_root_1" name="Profiles"
+              parent="main_menu"
+              action="action_student_profile"
+              sequence="2"/>
+</odoo>

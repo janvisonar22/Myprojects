@@ -1,0 +1,67 @@
+<odoo>
+  <record id="job_order_form_view" model="ir.ui.view">
+    <field name="name">maintenance.job.order.form</field>
+    <field name="model">maintenance.job.order</field>
+    <field name="arch" type="xml">
+      <form string="Job Order">
+        <sheet>
+          <group>
+            <group>
+              <field name="name"/>
+              <field name="project"/>
+            </group>
+            <group>
+              <field name="assiness_id"/>
+              <field name="customer_id"/>
+              <field name="planned_date"/>
+              <field name="deadline_date"/>      
+              <field name="tags" widget="many2many_tags"/>
+            </group>
+          </group>
+          <notebook>
+            <page string="Description">
+              <field name="descreption"/>
+            </page>
+            <page string="Extra Info">
+              <group>
+                <group>
+                  <field name="sequence"/>
+                  <field name="email_cc"/>
+                </group>
+                <group>
+                  <field name="company"/>
+                  <field name="cover_image"/>
+                  <field name="assigned_date"/>
+                  <field name="request_id"/>
+                </group>
+              </group>
+            </page>
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
+  <record id="job_order_tree_view" model="ir.ui.view">
+    <field name="name">maintenance.job.order.tree</field>
+    <field name="model">maintenance.job.order</field>
+    <field name="arch" type="xml">
+      <list>
+        <field name="project"/>
+        <field name="assiness_id"/>
+        <field name="planned_date"/>
+        <field name="deadline_date"/>
+        <field name="customer_id"/>
+      </list>
+    </field>
+  </record>
+
+  <record id="job_order_action_form" model="ir.actions.act_window">
+    <field name="name">Job Order</field>
+    <field name="res_model">maintenance.job.order</field>
+    <field name="view_mode">list,form</field>
+    <field name="view_ids" eval="[(5, 0, 0),
+      (0, 0, {'view_mode': 'list', 'view_id': ref('job_order_tree_view')}),
+      (0, 0, {'view_mode': 'form', 'view_id': ref('job_order_form_view')})]"/>
+  </record>
+
+</odoo>

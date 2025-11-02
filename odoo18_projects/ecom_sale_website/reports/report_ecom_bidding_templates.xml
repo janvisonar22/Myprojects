@@ -1,0 +1,163 @@
+<odoo>
+    <template id="report_ecom_bidding_pdf">
+        <t t-call="web.html_container">
+            <t t-set="records" t-value="docs"/>
+
+            <style>
+                @page {
+                    size: A4 portrait;
+                    margin: 0;
+                }
+
+                body {
+                    font-family: "Arial", sans-serif;
+                    font-size: 12px;
+                    color: #333;
+                    margin: 0;
+                }
+
+                .page {
+                    position: relative;
+                    z-index: 1; 
+                    padding: 30mm 15mm 20mm 15mm;
+                    min-height: 297mm;
+                }
+
+                h2 {
+                    text-align: left;
+                    margin-bottom: 25px;
+                    color: #58504B;
+                    font-size: 20px;
+                }
+                .report-subtitle {
+                    text-align: right;
+                    color: #B4A9A1;
+                    font-size: 14px;
+                    margin-bottom: 10px;
+                }
+
+                table {
+                    width: 100%;
+                    border-collapse: separate;
+                    border-spacing: 0;
+                    margin-top: 20px;
+                    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+                    border-radius: 5px;
+                    position: relative; /* ✅ Important for middle balloons */
+                    z-index: 2;
+                }
+
+                th, td {
+                    border: none;
+                    padding: 8px 10px;
+                    font-size: 11px;
+                }
+
+                th {
+                    background-color: #58504B;
+                    color: white;
+                    font-weight: normal;
+                    text-align: left;
+                    border-right: 1px solid #7D736A;
+                }
+                th:last-child { border-right: none; }
+
+                tr:nth-child(odd) { background-color: #F8F8F8; }
+                td.center { text-align: center; }
+
+                /* Shapes */
+                .shape-top-left, .shape-bottom-right, .shape-middle-left, .shape-middle-right {
+                    position: absolute;
+                    border-radius: 50%;
+                    z-index: 0;
+                }
+                
+                .shape-top-left {
+                    top: -120px; left: -120px;
+                    width: 250px; height: 250px;
+                    background-color: #D2C4B7;
+                    opacity: 0.8; 
+                }
+                .shape-bottom-right {
+                    bottom: -150px; right: -150px;
+                    width: 300px; height: 300px;
+                    background-color: #7D736A;
+                    opacity: 0.6;
+                }
+
+                /* ✅ Middle balloons for table */
+                .shape-middle-left {
+                    top: 50%; left: -80px;
+                    width: 150px; height: 150px;
+                    background-color: #E0D6CE;
+                    opacity: 0.5;
+                    transform: translateY(-50%);
+                }
+                .shape-middle-right {
+                    top: 50%; right: -80px;
+                    width: 180px; height: 180px;
+                    background-color: #C2B7AF;
+                    opacity: 0.5;
+                    transform: translateY(-50%);
+                }
+
+                .content-wrapper { position: relative; z-index: 2; }
+
+                .note-box {
+                    margin-top: 30px;
+                    padding: 10px 0;
+                    font-size: 10px;
+                    color: #555;
+                    border-top: 1px solid #ccc;
+                    text-align: center;
+                }
+            </style>
+
+            <div class="page">
+                <!-- Background shapes -->
+                <div class="shape-top-left"></div>
+                <div class="shape-bottom-right"></div>
+                
+                <div class="content-wrapper">
+                    <div style="text-align: right;">
+                        <span class="report-subtitle">E-Commerce Bidding Report</span>
+                    </div>
+                    
+                    <h2 style="border-bottom: 2px solid #D2C4B7;">Bidding Reports</h2>
+
+                    <!-- Middle balloons inside table area -->
+                    <div class="shape-middle-left"></div>
+                    <div class="shape-middle-right"></div>
+                    
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Customer Name</th>
+                                <th>Contact Name</th>
+                                <th>Product</th>
+                                <th class="center">Price</th>
+                                <th class="center">Suggestion Price</th>
+                                <th class="center">Create Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="records" t-as="o">
+                                <tr>
+                                    <td><t t-esc="o.customer_id.name"/></td>
+                                    <td><t t-esc="o.contact.name if o.contact else '-'"/></td>
+                                    <td><t t-esc="o.product_id.display_name"/></td>
+                                    <td class="center"><t t-esc="o.price"/></td>
+                                    <td class="center"><t t-esc="o.suggestion_price"/></td>
+                                    <td class="center"><t t-esc="o.create_date" t-options='{"widget": "date"}'/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+
+                    <div class="note-box">
+                        <strong>Note:</strong> Prices are suggestions only. Thank You For Your Businesses                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

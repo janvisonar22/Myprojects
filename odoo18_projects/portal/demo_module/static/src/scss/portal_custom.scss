@@ -1,0 +1,26 @@
+/* portal_custom.scss */
+
+#portal_saleorder_category .o_portal_index_card {
+  border-radius: 12px;
+  border: 2px solid #007bff;
+  background: #f9fbff;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+#portal_saleorder_category .o_portal_index_card:hover {
+  transform: translateY(-5px);
+  background: #e9f2ff;
+}
+
+#portal_saleorder_category .o_portal_index_card h4,
+#portal_saleorder_category .o_portal_index_card .o_portal_docs_title {
+  color: #0056b3;
+  font-weight: 600;
+}
+
+#portal_saleorder_category .o_portal_index_card p {
+  color: #444;
+  font-size: 14px;
+  margin-top: 6px;
+}

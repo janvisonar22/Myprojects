@@ -1,0 +1,127 @@
+<odoo>
+<template id="product_bidding_button" inherit_id="website_sale.product" name="Bidding Button">
+<xpath expr="//a[@id='add_to_cart']" position="after">
+        <a role="button" class="btn btn-primary o_we_bidding ms-1"
+           t-att-href="'/bidding/%s' % product.id">
+            <i class="fa fa-gavel me-2"/>
+            Bidding
+        </a>
+    </xpath>
+</template>
+
+<template id="bidding_template" name="Bidding Page">
+    <t t-call="website.layout">
+        <div class="container mt-5">
+            <form t-att-action="'/bidding/save/%s' % product.id" method="post" class="shadow p-4 rounded bg-light">
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+                <div class="row g-4 align-items-center">
+                    
+                    <!-- Left Column: Product Image -->
+                    <div class="col-md-6 text-center">
+                        <img t-att-src="product.image_1920 and '/web/image/product.template/' + str(product.id) + '/image_1920' or '/web/static/src/img/placeholder.png'"
+                             class="img-fluid rounded shadow-sm border" alt="Product Image"/>
+                    </div>
+
+                    <!-- Right Column: Form Fields -->
+                    <div class="col-md-6">
+                        <h2 class="text-primary mb-3">Bidding Form</h2>
+
+                        <!-- Customer Name -->
+                        <div class="mb-3">
+                            <label for="customer_name" class="form-label fw-bold">Customer Name</label>
+                            <input type="text" name="customer_name" class="form-control"
+                                   id="customer_name" placeholder="Enter your name"/>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="mb-3">
+                            <label for="customer_email" class="form-label fw-bold">Email</label>
+                            <input type="email" name="customer_email" class="form-control"
+                                   id="customer_email" placeholder="Enter your email" />
+                        </div>
+
+                        <!-- Phone -->
+                        <div class="mb-3">
+                            <label for="customer_phone" class="form-label fw-bold">Phone Number</label>
+                            <input type="text" name="customer_phone" class="form-control"
+                                   id="customer_phone" placeholder="Enter your phone"/>
+                        </div>
+
+                        <!-- Product -->
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Product</label>
+                            <p class="form-control-plaintext" t-esc="product.name"/>
+                        </div>
+
+                        <!-- Price -->
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Price</label>
+                            <p class="form-control-plaintext text-success">
+                                ₹ <t t-esc="(product.list_price or 0)"/>
+                            </p>
+                        </div>
+
+                        <!-- Suggestion Price -->
+                        <div class="mb-3">
+                            <label for="suggestion_price" class="form-label fw-bold">Your Suggested Price</label>
+                            <input type="number" name="suggestion_price" class="form-control"
+                                   id="suggestion_price" placeholder="Enter your suggestion"
+                                   min="0" step="0.01" required="required"/>
+                        </div>
+
+                        <!-- Description -->
+                        <div t-if="product.description_sale" class="mb-3">
+                            <label class="form-label fw-bold">Description</label>
+                            <p t-raw="product.description_sale"/>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="d-grid mt-4">
+                            <button type="submit" class="btn btn-lg btn-primary">
+                                <i class="fa fa-gavel me-2"></i> Place a Bid
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </t>
+</template>
+
+
+<template id="bidding_confirmation" name="Bidding Confirmation">
+    <t t-call="website.layout">
+        <div class="container mt-5 text-center">
+            <h2 class="text-success">Thank you for your bid!</h2>
+
+            <p>Product: <t t-esc="product.name"/></p>
+            <p>Suggestion Price: <t t-esc="suggestion_price"/></p>
+            <a class="btn btn-primary mt-3" t-att-href="'/shop/product/%s' % product.id">Back to Product</a>
+        </div>
+    </t>
+</template>
+
+    <!-- Custom Hello Page -->
+<!--     <template id="bidding_template" name="Bidding Page">
+        <t t-call="website.layout">
+            <div class="container mt-5">
+                <h2 class="text-center text-primary">Bidding for Product</h2>
+                <table class="table table-bordered mt-3">
+                    <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td t-esc="product.name"/>
+                            <td t-esc="product.list_price"/>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+ --></odoo>

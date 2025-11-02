@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--     <template id="portal_my_home_custom_hello" inherit_id="portal.portal_my_home" name="Custom Hello Portal" priority="20">
+
+		<xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+			<div id="portal_custom_hello" class="o_portal_card text-center">
+				<h4>Hello</h4>
+			</div>
+		</xpath>
+
+	</template>
+</odoo>
+ -->
+ <odoo>
+    <!-- Custom Sale Orders Card in Portal Home -->
+    <template id="portal_my_home_custom_saleorder"
+              inherit_id="portal.portal_my_home"
+              name="Custom Sale Order Portal"
+              priority="20">
+
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <div id="portal_saleorder_category">
+            	<div class="o_portal_index_card col-md-6 order-6">
+                <t t-call="portal.portal_docs_entry">
+                    <!-- Optional bg color (alert style) -->
+                    
+                    <!-- Custom icon -->
+                    <t t-set="icon" t-value="'/demo_module/static/src/img/custom_icon.svg'"/>
+                    
+                    <!-- Title of the card -->
+                    <t t-set="title">My Sale Orders</t>
+                    
+                    <!-- Redirect URL -->
+                    <t t-set="url" t-value="'/my/sale_orders'"/>
+                    
+                    <!-- Small description -->
+                    <t t-set="text">View your confirmed and done sales orders</t>
+                    
+                    <!-- Count Placeholder -->
+                    <t t-set="placeholder_count" t-value="'order_count'"/>
+                    
+                    <!-- Show count -->
+                    <t t-set="show_count" t-value="True"/>
+                </t>
+            </div>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="portal_my_sale_orders_custom" name="My Sale Orders Custom">
+        <t t-call="portal.portal_layout">
+            <t t-set="title">My Sale Orders</t>
+            <div class="container mt-4">
+                <h3 class="mb-3">My Sale Orders</h3>
+                <table class="table table-bordered table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Sales Order #</th>
+                            <th>Order Date</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="orders" t-as="order">
+                            <tr>
+                                <td><t t-esc="order.name"/></td>
+                                <td><t t-esc="order.date_order"/></td>
+                                <td>$ <t t-esc="order.amount_total"/></td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+</odoo>
+
+

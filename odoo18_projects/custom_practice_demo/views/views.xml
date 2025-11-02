@@ -1,0 +1,54 @@
+<odoo>
+  <data>
+    <record id="view_custom_practice_demo_tree" model="ir.ui.view">
+        <field name="name">custom.practice.demo.list</field>
+        <field name="model">custom.practice.demo</field>
+        <field name="arch" type="xml">
+            <list string="Custom Practice demo" sample="1">
+                <field name="name"/>
+                <field name="value"/>
+                <field name="description"/>
+
+            </list>
+
+        </field>
+    </record>
+
+
+    <record id="form_custom_practice_demo" model="ir.ui.view">
+        <field name="name">custom.practice.demo.form</field>
+        <field name="model">custom.practice.demo</field>
+        <field name="arch" type="xml">
+            <form string="Custom Practice demo">
+                <header>
+                <button class="btn-primary" name="demo_button1"
+                                    type="object" string="Demo report">
+                                </button>
+                                  <button name="open_demo_wizard" string="Open Wizard" type="object" class="btn-secondary"/>
+
+
+                </header>
+                <sheet>
+                    <group>
+                        <field name="partner_id"/>
+                <field name="name"/>
+                <field name="value"/>
+                <field name="description"/>
+                    </group>
+                </sheet>
+            </form>
+
+        </field>
+
+    </record>
+
+
+    <record id="action_custom_practice_demo" model="ir.actions.act_window">
+        <field name="name">Custom Practice Demo</field>
+        <field name="res_model">custom.practice.demo</field>
+        <field name="view_mode">list,form</field>
+
+    </record>
+
+  </data>
+</odoo>

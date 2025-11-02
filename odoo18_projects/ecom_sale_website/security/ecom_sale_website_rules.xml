@@ -1,0 +1,18 @@
+<odoo>
+    <!-- Manager Rule (see all records) -->
+    <record id="rule_ecom_sale_manager_all" model="ir.rule">
+        <field name="name">Ecom Sale Website Manager: See All</field>
+        <field name="model_id" ref="model_ecom_sale_website"/>
+        <field name="groups" eval="[(4, ref('ecom_sale_website.group_ecom_sale_manager'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+    </record>
+
+    <!-- User Rule (see only own records) -->
+    <record id="rule_ecom_sale_user_own" model="ir.rule">
+        <field name="name">Ecom Sale Website User: Own Records</field>
+        <field name="model_id" ref="model_ecom_sale_website"/>
+        <field name="groups" eval="[(4, ref('ecom_sale_website.group_ecom_sale_user'))]"/>
+        <field name="domain_force">[('user_id', '=', user.id)]</field>
+    </record>
+</odoo>
+

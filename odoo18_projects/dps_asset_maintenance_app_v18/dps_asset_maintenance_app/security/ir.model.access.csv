@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_maintenance_job_order,Maintenance Job Order,model_maintenance_job_order,base.group_user,1,1,1,1
+access_maintenance_tag,Maintenance Tag,model_maintenance_tag,base.group_user,1,1,1,1
+access_maintenance_checklist,Maintenance checklist,model_maintenance_checklist,base.group_user,1,1,1,1
+access_maintenance_product,Maintenance product,model_maintenance_product,base.group_user,1,1,1,1
+access_maintenance_purchase_requisition,Maintenance Purchase Requisition,model_maintenance_purchase_requisition,base.group_user,1,1,1,1
+access_dashboard_dashboard,Dashboard Dashboard,model_dashboard_dashboard,base.group_user,1,1,1,1
+access_wizard_maintenance_report,Wizard Maintenance Report,model_wizard_maintenance_report,base.group_user,1,1,1,1
+
+
+

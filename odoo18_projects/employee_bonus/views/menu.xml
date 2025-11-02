@@ -1,0 +1,4 @@
+<odoo>
+    <menuitem id="menu_hr_root" name="Human Resources"/>
+    <menuitem id="menu_employee_bonus" name="Employee Bonus" parent="menu_hr_root" action="action_employee_bonus"/>
+</odoo>

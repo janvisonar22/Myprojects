@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Hide Delete button in Chatter for non-admin users -->
+    <record id="view_mail_message_form_inherit_hide_delete" model="ir.ui.view">
+        <field name="name">mail.message.form.hide.delete</field>
+        <field name="model">mail.message</field>
+        <field name="inherit_id" ref="mail.view_message_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='unlink']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
+

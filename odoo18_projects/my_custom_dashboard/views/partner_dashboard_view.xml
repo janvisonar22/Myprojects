@@ -1,0 +1,244 @@
+<odoo>
+    <!-- Define a new form view for partner.dashboard model -->
+    <record id="view_partner_dashboard_form" model="ir.ui.view">
+        <field name="name">partner.dashboard.form</field>
+        <field name="model">partner.dashboard</field>
+        <field name="arch" type="xml">
+            <form string="Customer Dashboard">
+                <sheet>
+
+                    <!-- ============================
+                         Customer Selection Section
+                         ============================ -->
+                    <group>
+                        <div class="dashboard-partner-card">
+                            <!-- Label for partner_id field -->
+                            <label for="partner_id" string="Customer" class="o_form_label"/>
+                            <!-- Dropdown to select customer -->
+                            <field name="partner_id" options="{'no_create': True}" class="o_field_widget o_input"/>
+                        </div>
+                    </group>
+
+                    <!-- ============================
+                         Sale Orders Smart Buttons
+                         ============================ -->
+                    <header>
+                        <div class="dashboard-buttons">
+
+                            <!-- Total Sale Orders Count -->
+                            <button name="action_count_sale_orders"
+                                    type="object"
+                                    string=" Sale Order Count"
+                                    class="oe_stat_button btn-primary"
+                                    icon="fa-shopping-cart">
+                                <field name="sale_order_count" widget="statinfo"/>
+                            </button>
+
+                            <!-- Total Sales Amount -->
+                            <button name="action_count_sale_orders"
+                                    type="object"
+                                    class="oe_stat_button btn-success"
+                                    icon="fa-dollar"
+                                    string="Total Amount">
+                                <field name="total_amount" widget="monetary"
+                                       options="{'currency_field': 'company_currency_id'}"/>
+                            </button>
+
+                            <!-- Draft (Quotation) Orders -->
+                            <button name="action_view_draft_sales"
+                                    type="object"
+                                    class="oe_stat_button"
+                                    icon="fa-pencil"
+                                    string="Quotations">
+                                <field name="draft_sale_count" widget="statinfo"/>
+                            </button>
+
+                            <!-- Sent Quotations -->
+                            <button name="action_view_sent_sales"
+                                    type="object"
+                                    class="oe_stat_button"
+                                    icon="fa-envelope"
+                                    string="Quotation Sent">
+                                <field name="sent_sale_count" widget="statinfo"/>
+                            </button>
+
+                            <!-- Confirmed Orders -->
+                            <button name="action_view_confirmed_sales"
+                                    type="object"
+                                    class="oe_stat_button"
+                                    icon="fa-check"
+                                    string="Confirmed">
+                                <field name="confirmed_sale_count" widget="statinfo"/>
+                            </button>
+
+                            <!-- Done Sales Orders -->
+                            <button name="action_view_done_sales"
+                                    type="object"
+                                    class="oe_stat_button"
+                                    icon="fa-flag-checkered"
+                                    string="Done">
+                                <field name="done_sale_count" widget="statinfo"/>
+                            </button>
+
+                            <!-- Cancelled Sales Orders -->
+                            <button name="action_view_cancelled_sales"
+                                    type="object"
+                                    class="oe_stat_button"
+                                    icon="fa-times"
+                                    string="Cancelled">
+                                <field name="cancel_sale_count" widget="statinfo"/>
+                            </button>
+
+                            <!-- Example (commented buttons for future use)
+                            <button name="action_view_confirmed_orders"
+                                    type="object"
+                                    class="oe_stat_button btn-success"
+                                    icon="fa-check"
+                                    string="Confirmed Orders">
+                                <field name="confirmed_count" widget="statinfo"/>
+                            </button>
+
+                            <button name="action_view_draft_orders"
+                                    type="object"
+                                    class="oe_stat_button btn-warning"
+                                    icon="fa-pencil"
+                                    string="Draft Orders">
+                                <field name="draft_count" widget="statinfo"/>
+                            </button>
+                            -->
+                        </div>
+                    </header>
+
+                    <!-- ============================
+                         Sale Order Lines (List View)
+                         ============================ -->
+<group>
+    <div class="o_row" style="display:flex; gap:20px;">
+        <!-- Sale Orders List -->
+        <div class="o_col" style="flex:1;">
+            <field name="sale_order_ids" readonly="1" nolabel="1">
+                <list>
+                    <!-- <field name="name"/> -->
+<!--                     <field name="date_order"/>
+                    <field name="amount_total" widget="monetary" options="{'currency_field': 'company_currency_id'}"/>
+                    <field name="state"/>
+ -->                </list>
+            </field>
+        </div>
+
+        <!-- Sale Orders Graph -->
+<!--         <div class="o_col" style="flex:1;">
+                     <field name="qty_price_graph"
+                           widget="dashboard_graph"
+                                       options="{'graphType': 'bar', 'stacked': false}"/>
+           </div>
+ -->   
+<!--                             <div class="o_col" style="flex:1;">
+                                <field name="sale_order_line_ids" readonly="1" nolabel="1">
+                                    <graph string="Qty vs Price" type="bar">
+                                        <field name="product_id"/>
+                                        <field name="product_uom_qty" type="measure"/>
+                                        <field name="price_unit" type="measure"/>
+                                    </graph>
+                                </field>
+                            </div>
+
+ -->
+
+
+                        <div class="o_col" style="flex:1;">
+                        <field name="qty_price_graph"
+                               widget="dashboard_graph" 
+                               options="{'graphType': 'bar'}"/>
+                                                    </div>
+                          </div>
+                        </group>
+                    <!-- ============================
+                         Purchase Orders Smart Buttons
+                         ============================ -->
+                    <header>
+                        <div class="dashboard-buttons">
+
+                            <!-- Total Purchase Orders -->
+                            <button name="action_count_purchase_orders"
+                                    type="object"
+                                    class="oe_stat_button btn-primary"
+                                    icon="fa-shopping-cart"
+                                    string="Purchase Orders">
+                                <field name="purchase_order_count" widget="statinfo"/>
+                            </button>
+
+                            <!-- Draft RFQs -->
+                            <button name="action_view_draft_purchases"
+                                    type="object"
+                                    class="oe_stat_button btn-warning"
+                                    icon="fa-pencil"
+                                    string="RFQ (Draft)">
+                                <field name="draft_purchase_count" widget="statinfo"/>
+                            </button>
+
+                            <!-- RFQs Sent -->
+                            <button name="action_view_sent_purchases"
+                                    type="object"
+                                    class="oe_stat_button btn-info"
+                                    icon="fa-envelope"
+                                    string="RFQ Sent">
+                                <field name="sent_purchase_count" widget="statinfo"/>
+                            </button>
+
+                            <!-- Confirmed Purchases -->
+                            <button name="action_view_confirmed_purchases"
+                                    type="object"
+                                    class="oe_stat_button btn-success"
+                                    icon="fa-check"
+                                    string="Confirmed">
+                                <field name="confirmed_purchase_count" widget="statinfo"/>
+                            </button>
+
+                            <!-- Done Purchases -->
+                            <button name="action_view_done_purchases"
+                                    type="object"
+                                    class="oe_stat_button btn-primary"
+                                    icon="fa-flag-checkered"
+                                    string="Done">
+                                <field name="done_purchase_count" widget="statinfo"/>
+                            </button>
+
+                            <!-- Cancelled Purchases -->
+                            <button name="action_view_cancelled_purchases"
+                                    type="object"
+                                    class="oe_stat_button btn-danger"
+                                    icon="fa-times"
+                                    string="Cancelled">
+                                <field name="cancel_purchase_count" widget="statinfo"/>
+                            </button>
+
+                        </div>
+                    </header>
+
+                    <!-- ============================
+                         Purchase Order Lines (List View)
+                         ============================ -->
+                    <group>
+                        <field name="purchase_order_ids" readonly="1" nolabel="1">
+                            <list>
+                                <!-- List content auto-generated by Odoo -->
+                            </list>
+                        </field>
+                    </group>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ============================
+         Action to open the dashboard
+         ============================ -->
+    <record id="action_partner_dashboard" model="ir.actions.act_window">
+        <field name="name">Dashboard</field>
+        <field name="res_model">partner.dashboard</field>
+        <field name="view_mode">form</field>
+        <field name="target">current</field>
+    </record>
+</odoo>

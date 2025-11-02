@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+ <!-- create form view -->
+         <record id="view_template_student_list" model="ir.ui.view">
+            <field name="name">student.profile.list</field>
+            <field name="model">student.profile</field>
+            <field name="arch" type="xml">
+                <list string="Student Profile">
+                        <field name="name"/>
+                        <field name="roll_number"/>
+                </list>
+            </field>
+        </record>
+
+    <record id="view_template_student_form" model="ir.ui.view">
+        <field name="name">student.profile.form</field>
+        <field name="model">student.profile</field>
+        <field name="arch" type="xml">
+            <form string="Student Profile">
+                <sheet>
+                    <group>
+                                                <group>
+
+                        <h3>student profile</h3>
+                        <field name="name"/>
+                        <field name="roll_number"/>
+                    <field name="class_name"/>
+                    <field name="dob"/>
+                </group>
+
+                <group>
+                    <field name="gender"/>
+                    <field name="email"/>
+                    <field name="phone"/>
+                    <field name="address"/>
+                    <field name="teacher_id"/>
+
+
+                    
+</group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+
+    </record>
+    <record id="action_student_profile" model="ir.actions.act_window">
+        <field name="name">Student Profile</field>
+        <field name="res_model">student.profile</field>
+        <field name="view_mode">list,form</field>
+<!--         <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create your First student</p>
+        </field>
+ -->    </record>
+
+</odoo>

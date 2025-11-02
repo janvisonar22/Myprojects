@@ -1,0 +1,28 @@
+<odoo>
+    <!-- Menu -->
+    <menuitem id="menu_tts_root" name="Text To Speech"/>
+
+    <record id="view_text_to_speech_form" model="ir.ui.view">
+        <field name="name">text.to.speech.form</field>
+        <field name="model">text.to.speech</field>
+        <field name="arch" type="xml">
+            <form string="Text To Speech">
+                <sheet>
+                    <group>
+                        <field name="name" placeholder="Type your text here..."/>
+                        <button type="object" name="action_speak" string="Speak" class="btn btn-primary"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_text_to_speech" model="ir.actions.act_window">
+        <field name="name">Text To Speech</field>
+        <field name="res_model">text.to.speech</field>
+        <field name="view_mode">form,list</field>
+    </record>
+
+    <menuitem id="menu_tts_action" name="Text To Speech"
+              parent="menu_tts_root" action="action_text_to_speech"/>
+</odoo>

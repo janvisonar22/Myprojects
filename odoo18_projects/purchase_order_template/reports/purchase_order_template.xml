@@ -1,0 +1,177 @@
+<odoo>
+    <template id="report_purchase_order_document">
+        <t t-call="web.external_layout">
+            <header>
+                <div class="row" style="margin-bottom: 10px;">
+                    <div class="col-6" style="color: #007bff; font-size: 18px; font-weight: bold;">
+                        <img t-if="docs.company_id.logo"
+                             class="o_company_logo_big"
+                             t-att-src="image_data_uri(docs.company_id.logo)"
+                             alt="Logo" style="max-height: 80px;"/>
+                        <t t-if="not docs.company_id.logo">Any Company Logo</t>
+                    </div>
+                    <div class="col-6 text-right">
+                        <h3 style="color: #007bff; font-size: 18px; font-weight: bold;"><t t-esc="docs[0].company_id.name or 'Any Company Name'"/></h3>
+                    </div>
+                </div>
+            </header>
+            <main class="page">
+
+                <div class="row" style="border-top: 1px solid black; border-bottom: 1px solid black; padding: 5px 0; margin-bottom: 20px;">
+                    <div class="col-6">
+                        <span style="font-weight: bold;">PO No. : </span> 
+                        <span style="padding-bottom: 2px; display: inline-block; min-width: 250px;">
+                            <t t-esc="docs[0].name or ''"/>
+                        </span>
+                    </div>
+                    <div class="col-6 text-right">
+                        <span style="font-weight: bold;">Date:</span> 
+                        <span style="padding-bottom: 2px; display: inline-block; min-width: 150px;">
+                            <t t-esc="docs[0].date_order or ''"/>
+                        </span>
+                    </div>
+                </div>
+
+                <h2 class="text-center" style="margin-top: 5px; margin-bottom: 20px; font-size: 20px; font-weight: bold; padding: 5px 0;">
+                    PURCHASE ORDER
+                </h2>
+
+                <div style="font-size: 15px;">
+                    <p style="margin: 0; padding: 0; "><strong>To,</strong></p>
+                    <p style="margin: 0; padding: 0; color: #007bff; "><strong><t t-esc="docs[0].partner_id.name or ''"/></strong></p>
+                    <t t-set="address_parts" t-value="docs[0].partner_id.contact_address and docs[0].partner_id.contact_address.split('\n') or []"/>
+                    <t t-foreach="address_parts" t-as="part">
+                        <p style="margin: 0; padding: 0; margin-left: 20px;"><t t-esc="part"/></p>
+                    </t>
+                    <p style="margin: 0; padding: 0; margin-top: 5px;"><strong>Phone:</strong> <t t-esc="docs[0].partner_id.phone or ''"/> <strong>Fax:</strong> <span></span></p>
+                    <p style="margin: 0; padding: 0;"><strong>Email:</strong> <t t-esc="docs[0].partner_id.email or ''"/></p>
+                    <p style="margin: 0; padding: 0; margin-top: 10px;"><strong>Kind Attention:</strong> <u><t t-esc="docs[0].user_id.name or ''"/></u></p>
+                    <p style="margin: 0; padding: 0;"><strong>Subject:</strong> <u>Supply of Packing material and general consumables.</u></p>
+                </div>
+
+                <p style="margin-top: 10px; font-size: 15px;">
+                    Dear Sir,
+                    <br/>
+                    <br/>
+                    <t t-set="vendor_bill" t-value="docs[0].invoice_ids.filtered(lambda i: i.move_type == 'in_invoice' and i.state in ('draft', 'posted'))[:1]"/>
+                    With reference of the Bill No. <t t-esc="vendor_bill.name or docs[0].partner_ref or 'N/A'"/> and Date <t t-esc="vendor_bill.invoice_date or docs[0].date_order or 'N/A'"/>, we are pleased to place our order for the following, at the indicated terms &amp; conditions.
+                </p>
+                <table class="table table-sm table-bordered mt-2" style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="background-color: #17a2b842; font-weight: bold;">
+                            <th style="border: 1px solid black; padding: 5px; width: 10%; text-align: center;">Sr. No.</th>
+                            <th style="border: 1px solid black; padding: 5px; width: 40%; text-align: left;">Description</th>
+                            <th style="border: 1px solid black; padding: 5px; width: 15%; text-align: right;">Quantity</th>
+                            <th style="border: 1px solid black; padding: 5px; width: 15%; text-align: right;">Unit Price</th>
+                            <th style="border: 1px solid black; padding: 5px; width: 20%; text-align: right;">Total Price</th>
+                        </tr>
+                        <tr style="background-color: #17a2b842; " >
+                            <th></th>
+                            <th></th>
+                            <th style="text-align: right;">Units</th>
+                            <th style="text-align: right;">AED</th>
+                            <th style="text-align: right;">AED</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-set="sr_no" t-value="0"/>
+                        <t t-foreach="docs[0].order_line" t-as="line">
+                            <t t-set="sr_no" t-value="sr_no + 1"/>                
+                            <tr>
+                                <td style="border: 1px solid black; padding: 5px; text-align: center;"><t t-esc="sr_no"/></td>
+                                <td style="border: 1px solid black; padding: 5px;"><t t-esc="line.name or ''"/></td>
+                                <td style="border: 1px solid black; padding: 5px; text-align: right;">
+                                    <t t-esc="line.product_qty or 0"/> 
+                                    <t t-esc="line.product_uom.name or ''"/>
+                                </td>
+                                <td style="border: 1px solid black; padding: 5px; text-align: right;"><t t-esc="'%.2f' % line.price_unit"/></td>
+                                <td style="border: 1px solid black; padding: 5px; text-align: right;"><t t-esc="'%.2f' % line.price_subtotal"/></td>
+                            </tr>
+                        </t>
+
+                        <tr>
+                            <td colspan="3" style="border-right: none;"></td>
+                            <td style="border: 1px solid black; padding: 5px; text-align: right; font-weight: bold;">Total in AED</td>
+                            <td style="border: 1px solid black; padding: 5px; text-align: right; font-weight: bold;"><t t-esc="'%.2f' % docs[0].amount_untaxed"/></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="border-right: none;"></td>
+                            <td style="border: 1px solid black; padding: 5px; text-align: right; font-weight: bold;">Discount</td>
+                            <td style="border: 1px solid black; padding: 5px; text-align: right;">
+                                <t t-esc="'%.2f' % (docs[0].amount_untaxed - docs[0].amount_total + docs[0].amount_tax)"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="border-right: none;"></td>
+                            <td style="border: 1px solid black; padding: 5px; text-align: right; font-weight: bold;">Grand Total</td>
+                            <td style="border: 1px solid black; padding: 5px; text-align: right; font-weight: bold;"><t t-esc="'%.2f' % docs[0].amount_total"/></td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid black; padding: 5px; text-align: left; font-weight: bold;">Total in Words:</td>
+                            <td colspan="4" style="border: 1px solid black; padding: 5px;">
+                                <t t-if="docs[0].currency_id">
+                                    <t t-esc="docs[0].currency_id.amount_to_text(docs[0].amount_total)"/>
+                                </t>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+<h4 style="margin-top: 20px; font-size: 16px;">
+                <strong><u>Terms &amp; Conditions</u></strong>
+            </h4>
+            <div style="padding: 10px; font-size: 14px;">
+                <p t-field="docs[0].notes" style="margin: 0; padding: 0; white-space: pre-wrap;"/>
+                <t t-if="not docs[0].notes">
+                    <p style="margin-top: -18px; padding: 0;"><strong>1. Shipping Documents :</strong></p>
+                    <!-- <p style="margin-top: 5px; padding: 0;">This section is the default Terms &amp; Conditions. It can be set dynamically using the 'Notes' or a custom T&amp;C field on the Purchase Order.</p> -->
+                </t>
+            </div>
+
+            <h4 style="margin-top: -5px; font-size: 16px; font-weight: bold;">
+                <u>Order Acknowledgement:</u> Kindly email to us the order acknowledgment on receipt of this order. Please confirm the Ex-works shipment date as well.
+            </h4>
+<div class="mt-5" style="margin-top:-34px;">
+                <p style="margin-top:-16px; padding: 0; font-size: 16px;"><strong>For</strong> <span style="color: #007bff; font-weight: bold;"><t t-esc="docs[0].company_id.name or 'Company Name'"/></span></p>
+
+                <div style="min-height: 50px;">
+                    <img t-if="docs[0].company_id.signature_image"
+                         t-att-src="image_data_uri(docs[0].company_id.signature_image)"
+                         alt="E-Signature"
+                         style="max-height: 80px; width: auto; opacity: 0.8;"/>
+                    <p t-if="not docs[0].company_id.signature_image" style="margin: 0; padding: 0; color: #007bff; font-weight: bold; font-size: 16px;">[E-Signature Not Uploaded]</p>
+                </div>
+                
+                <p style=" padding: 0; color: #007bff; font-weight: bold; font-size: 16px; margin-bottom:0px;">
+                    <t t-esc="docs[0].user_id.name or 'Manager Name'"/>
+                    <t t-if="docs[0].user_id.phone">
+                        &amp; Phone: <t t-esc="docs[0].user_id.phone"/>
+                    </t>
+                </p>
+            </div>
+<div class="text-center" style="border-top: 1px solid black; padding-top: 3px; margin-top: 10px; font-size: 17px;">
+  <!--   <p style="margin: 0; padding: 0;">
+        <strong><t t-esc="docs[0].company_id.name or 'Company Name'"/></strong>
+    </p>
+     -->
+    <p style="margin: 0; padding: 0;">
+        <t t-if="docs[0].company_id.street">
+            <strong style="margin-right: 5px;">Factory Address:</strong>
+        </t>
+         <span style="color: #007bff;">
+        <t t-esc="docs[0].company_id.street or ''"/>, <t t-esc="docs[0].company_id.city or ''"/>, <t t-esc="docs[0].company_id.state_id.name or ''"/> - <t t-esc="docs[0].company_id.zip or ''"/></span>
+    </p>
+    
+    <p style="margin: 0; padding: 0;">
+        <strong>P.O. Box:</strong> 
+                 <span style="color: #007bff;">
+                    <t t-esc="docs[0].company_id.partner_id.zip or 'P.O.Box Number'"/></span> | 
+        <strong>Phone:</strong>         <span style="color: #007bff;">
+ <t t-esc="docs[0].company_id.phone or 'Phone'"/></span> | 
+        <strong>Email:</strong>         <span style="color: #007bff;">
+ <t t-esc="docs[0].company_id.email or 'Email'"/></span>
+    </p>
+    <p style="margin: 0; padding: 0; margin-top: 2px;">Page 1 of 1</p> 
+</div></main>
+        </t>
+    </template>
+</odoo>

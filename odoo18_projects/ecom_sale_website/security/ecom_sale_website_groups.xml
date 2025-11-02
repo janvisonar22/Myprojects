@@ -1,0 +1,24 @@
+<odoo>
+    <record model="ir.module.category" id="module_ecom_sale_manager_user">
+        <field name="name">Ecom Sale Website</field>
+        <field name="description">Ecom Sale Website</field>
+        <field name="sequence">10</field>
+    </record>
+    <!-- Manager Group -->
+    <record id="group_ecom_sale_manager" model="res.groups">
+        <field name="name">Ecom Sale Website Manager</field>
+        <field name="category_id" ref="module_ecom_sale_manager_user"/>
+    </record>
+
+    <!-- User group -->
+    <record id="group_ecom_sale_user" model="res.groups">
+        <field name="name">Ecom Sale Website User</field>
+        <field name="category_id" ref="module_ecom_sale_manager_user"/>
+    </record>
+</odoo>
+
+
+
+
+
+

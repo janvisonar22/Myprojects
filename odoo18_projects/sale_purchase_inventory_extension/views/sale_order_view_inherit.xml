@@ -1,0 +1,33 @@
+<odoo>
+    <!-- Smart Button in Sale Order -->
+    <record id="view_sale_order_form_inherit_purchase_button" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit.purchase.button</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <div class="button-box">
+                <button name="action_view_purchase_orders"
+                        type="object"
+                        string="Purchase Orders"
+                        class="oe_stat_button"
+                        icon="fa-shopping-cart"/>
+                    </div>
+
+                    <button name="action_view_pickings"
+                        type="object"
+                        string="Receipts"
+                        class="oe_stat_button"
+                        icon="fa-truck"/>
+
+            </xpath>
+<!--             <xpath expr="//field[@name='product_uom_qty']" position="after">
+                <field name="delivery_created" readonly="1"/>
+            </xpath>
+            <xpath expr="//field[@name='product_uom_qty']" position="after">
+                <field name="delivery_created" readonly="1"/>
+            </xpath>
+ -->
+        </field>
+    </record>
+</odoo>

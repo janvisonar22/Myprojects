@@ -1,0 +1,71 @@
+<odoo>
+  <record id="maintenance_purchase_requisition_form_view" model="ir.ui.view">
+    <field name="name">maintenance.purchase.requisition.form</field>
+    <field name="model">maintenance.purchase.requisition</field>
+    <field name="arch" type="xml">
+      <form>
+         <header>
+            <field name="state" widget="statusbar" statusbar_visible="draft,ongoing,closed,cancel"/>
+            <button name="action_new_quotation" string="New Quotation" type="object"
+                    class="btn-primary" invisible="state in ('ongoing','closed')" />
+            <button name="action_close" string="Close" type="object"
+                    class="btn-primary" invisible="state in ('closed')"/>
+            <button name="action_cancel" string="Cancel" type="object"
+                    class="btn-primary" invisible="state in ('cancel','closed')"/>
+        </header>
+        <sheet>
+            <group>
+              <group>
+                <field name="name" readonly="1"/>
+                <field name="purchase_rep_id"/>
+                <field name="agreement_type"/>
+                <field name="vendor_id"/>
+              </group>
+              <group>
+                <field name="agreement_deadline"/>
+                <field name="ordering_date"/>
+                <field name="delivery_date"/>
+                <field name="source_document"/>
+                <field name="maintenance_request_id" readonly="1"/>
+                <field name="company_id"/>
+              </group>
+            </group>
+            <notebook>
+              <page string="Products">
+                <field name="product_line_ids" >
+                  <list editable="bottom"  create="0"> 
+                    <field name="product_id"/>
+                    <field name="quantity"/>
+                    <field name="uom_id"/>
+                    <field name="unit_price" widget="monetary"/>
+                  </list>
+                </field>
+              </page>
+            </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
+  <record id="purchase_requisition_tree_view" model="ir.ui.view">
+    <field name="name">maintenance.purchase.requisition.tree</field>
+    <field name="model">maintenance.purchase.requisition</field>
+    <field name="arch" type="xml">
+      <list>
+        <field name="purchase_rep_id"/>
+        <field name="agreement_type"/>
+        <field name="vendor_id"/>
+        <field name="agreement_deadline"/>
+        <field name="ordering_date"/>
+        <field name="delivery_date"/>      
+        <field name="state"/>
+      </list>
+    </field>
+  </record>
+
+  <record id="action_equipment_purchase_requisition" model="ir.actions.act_window">
+    <field name="name">Equipment Purchase Requisition</field>
+    <field name="res_model">maintenance.purchase.requisition</field>
+    <field name="view_mode">list,form</field>
+  </record>
+
+</odoo>

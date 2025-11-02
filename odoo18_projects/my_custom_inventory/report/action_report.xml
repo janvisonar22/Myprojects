@@ -1,0 +1,10 @@
+<odoo>
+    <record id="action_my_stock_pdf" model="ir.actions.report">
+    <field name="name">Stock Movement PDF</field>
+    <field name="model">warehouse.location.wizard</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">my_custom_inventory.my_stock_report_pdf</field>
+    <field name="report_file">my_custom_inventory.my_stock_report_pdf</field>
+    <field name="print_report_name">'Stock_Movements_%s' % (object.warehouse_id.name)</field>
+</record>
+</odoo>

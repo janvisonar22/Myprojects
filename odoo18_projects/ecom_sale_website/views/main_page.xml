@@ -1,0 +1,132 @@
+<odoo>
+    <!-- Tree View (List of Records) -->
+    <record id="view_ecom_sale_website_list" model="ir.ui.view">
+        <field name="name">ecom.sale.website.list</field>
+        <field name="model">ecom.sale.website</field>
+        <field name="arch" type="xml">
+            <list string="Ecom Sale Website">
+                <field name="customer_id"/>
+
+                <field name="product_id"/>
+                <field name="price"/>
+                <field name="suggestion_price"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View (Single Record) -->
+    <record id="view_ecom_sale_website_form" model="ir.ui.view">
+        <field name="name">ecom.sale.website.form</field>
+        <field name="model">ecom.sale.website</field>
+        <field name="arch" type="xml">
+            <form string="Ecom Sale Website">
+                <header>
+                        
+                        <field name="state" widget="statusbar"
+                            options="{'clickable': 'True'}"/>
+                    <!-- ================================================================= -->
+                    <!-- Header Buttons for E-Commerce Sale Website                        -->
+                    <!-- ================================================================= -->
+                    <!-- The visibility of these buttons is controlled by the 'state' field.
+                         States:
+                           - draft   → All buttons visible
+                           - done    → Cancel & Done visible, New Quotation hidden
+                           - cancel  → All buttons hidden                                      -->
+                    <!-- ================================================================= -->
+
+                    <!-- New Quotation Button 
+                         - Visible only in 'draft' state 
+                         - Hidden once moved to 'done' or 'cancel' -->
+                    <button name="action_new_quotation"
+                            string="New Quotation"
+                            type="object"
+                            class="btn-primary"
+                            invisible="state != 'draft'"/>
+
+                    <!-- Cancel Button
+                         - Visible in 'draft' and 'done' states
+                         - Hidden in 'cancel' state -->
+                    <button name="action_cancel"
+                            string="Cancel"
+                            type="object"
+                            class="btn-success"
+                            invisible="state == 'cancel'"/>
+
+                    <!-- Done Button
+                         - Visible in 'draft' and 'done' states
+                         - Hidden in 'cancel' state -->
+                    <button name="action_done"
+                            string="Done"
+                            type="object"
+                            class="btn-success"
+                            invisible="state == 'cancel'"/>
+
+                    <!-- Smart Button Box for related actions (e.g., View Quotations) -->
+                    <div class="oe_button_box" name="button_box">
+
+                    <button name="action_view_quotations"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-shopping-cart "> 
+                        <field name="quotation_count" widget="statinfo"/>
+                    </button>
+                </div>
+
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                        <field name="contact"/>
+                        <field name="customer_id"/>
+                        <field name="user_id"/>
+                        <field name="product_id"/>
+                    </group>
+                    <group>
+                        <field name="price"/>
+                        <field name="suggestion_price"/>
+                         <field name="customer_phone"/>
+                        <field name="customer_email"/>
+                    </group>
+                    </group>
+
+
+                 <notebook>
+                    <page string="Contact Sale Orders">
+                        <field name="contact_sale_order_ids">
+                            <list string="Sale Orders">
+                                <field name="name"/>
+                                <field name="partner_id"/>
+                                <field name="date_order"/>
+                                <field name="amount_total"/>
+                                <field name="state"/>
+                            </list>
+                        </field>
+                    </page>
+                    <page string="Contact Purchase Orders">
+                        <field name="contact_purchase_order_ids">
+                            <list string="Purchase Orders">
+                                <field name="name"/>
+                                <field name="partner_id"/>
+                                <field name="date_order"/>
+                                <field name="amount_total"/>
+                                <field name="state"/>
+                            </list>
+                        </field>
+                    </page>
+
+
+                </notebook>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action to open the view -->
+    <record id="action_ecom_sale_website" model="ir.actions.act_window">
+        <field name="name">Ecom Sale Website</field>
+        <field name="res_model">ecom.sale.website</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>

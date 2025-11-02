@@ -1,0 +1,305 @@
+<odoo>
+<record id="dashboard_dashboard_kanban_custom" model="ir.ui.view">
+    <field name="name">dashboard.dashboard.kanban.inherit</field>
+    <field name="model">dashboard.dashboard</field>
+    <field name="arch" type="xml">
+        
+            <kanban create="false" class="o_kanban_dashboard o_maintenance_kanban" full_width="1">
+                <field name="total_requests"/>
+                <field name="dashboard_data_filter"/>
+                <field name="my_total_requests_color"/>
+                <field name="inprogress_requests"/>
+                <field name="inprogress_requests_color"/>
+
+                <field name="repaired_requests"/>
+                <field name="repaired_requests_color"/>
+                <field name="scrap_requests"/>
+                <field name="scrap_requests_color"/>
+                <field name="total_equipments"/>
+                <field name="total_equipments_color"/>
+                <field name="total_job_order"/>
+                <field name="total_job_order_color"/>
+                <field name="total_requisition"/>
+                <field name="total_requisition_color"/>
+
+                <field name="draft_requisition"/>
+                <field name="draft_requisition_color"/>
+                <field name="ongoing_requisition"/>
+                <field name="ongoing_requisition_color"/>
+                <field name="close_requisition"/>
+                <field name="close_requisition_color"/>
+                <field name="cancel_requisition"/>
+                <field name="cancel_requisition_color"/>
+                <field name="maintenance_request_data"/>
+
+                <field name="maintenance_bar_graph_color"/>
+                <field name="maintenance_bar_graph"/>
+                <templates>
+                    <t t-name="maintenance_dashboard_block">
+                        <div t-attf-class="card main-card card-main" t-attf-style="border-color:#{main_record_color}">
+                            <div class="card-heading"
+                                 t-attf-style="border-color:#{main_record_color}; background-color: #{main_record_color};">
+                                <div class="row">
+                                    <div class="col-3 stat-icon">
+                                        <i t-attf-class="fa #{main_record_icon}" aria-label="Info" title="Info"></i>
+                                    </div>
+                                    <div class="col-9 text-right">
+                                        <div class="value">
+                                            <span t-esc="main_field_name"/>
+                                        </div>
+                                        <div class="title">
+                                            <t t-esc="main_record_lable"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a type="object" name="main_open_dashboard_action"
+                               t-attf-context="{'main_action': '#{main_record_action}' }"
+                               t-attf-style="color: #{main_record_color};">
+                                <div class="card-footer main-footer">
+                                    <span class="float-start">View Details</span>
+                                    <span class="float-end">
+                                        <i class="fa fa-arrow-circle-right" aria-label="Info" title="Info"></i>
+                                    </span>
+                                    <div class="clearfix"/>
+                                </div>
+                            </a>
+                        </div>
+                    </t>
+                    <t t-name="maintenance_dashboard_block_second">
+                        <div t-attf-class="card main-card card-main" t-attf-style="border-color:#{main_record_color}">
+                            <div class="card-heading" t-attf-style="border-color:#{main_record_color}; background-color: #{main_record_color};">
+                                <div class="row">
+                                    <div class="col-3 stat-icon">
+                                        <i t-attf-class="fa #{main_record_icon}" aria-label="Info" title="Info"></i>
+                                    </div>
+                                    <div class="col-9 text-right">
+                                        <div class="row">
+                                            <div class="col-6 text-center my-auto">
+                                                <a type="object" name="main_open_dashboard_action" t-attf-context="{'main_action': '#{main_record_action}' }">
+                                                
+                                                    <div class="value big-main-number">
+                                                        <span t-esc="main_field_name"/>
+                                                    </div>
+                                                    <div class="title small">
+                                                        <t t-esc="main_record_lable"/>
+                                                    </div>
+                                                </a>
+                                            </div>
+
+                                            <div class="col-6 text-center my-auto">
+                                                <a type="object" name="main_open_dashboard_action" t-attf-context="{'main_action': '#{main_record2_action}' }">
+                                                
+                                                    <div class="value big-main-number">
+                                                        <span t-esc="main_field2_name"/>
+                                                    </div>
+                                                    <div class="title small">
+                                                        <t t-esc="main_record2_lable"/>
+                                                    </div>
+                                                </a>
+                                            </div>                                            
+                                        </div>
+                                        <hr class="main-hr"/>
+                                        <div class="text-center title"><t t-esc="main_lable"/></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                    <t t-name="kanban-box">
+                        <div id="maintenance_dashboard" class="">
+                            <div class="row">
+                               <span t-esc="dashboard_data_filter"/>
+                                <div class="btn-group col-4 mt8 mb8" role="group" aria-label="Filters">
+                                    <button t-attf-class="btn #{record.dashboard_data_filter.raw_value=='today' ? 'btn-primary' : 'btn-secondary'}" type="object" name="today_data">Today</button>
+                                    <button t-attf-class="btn #{record.dashboard_data_filter.raw_value=='week' ? 'btn-primary' : 'btn-secondary'}" type="object" name="week_data">This Week</button>
+                                    <button t-attf-class="btn #{record.dashboard_data_filter.raw_value=='month' ? 'btn-primary' : 'btn-secondary'}" type="object" name="month_data">This Month</button>
+                                    <button t-attf-class="btn #{record.dashboard_data_filter.raw_value=='all' ? 'btn-primary' : 'btn-secondary'}" type="object" name="all_data">Till Now</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3 main_block">
+                                    <t t-call="maintenance_dashboard_block">
+                                        <t t-set="main_record_color" t-value="record.my_total_requests_color.raw_value"/>
+                                        <t t-set="main_record_icon" t-value="'fa-cogs'"/>
+                                        <t t-set="main_field_name" t-value="record.total_requests.raw_value"/>
+                                        <t t-set="main_record_lable">Maintenance Requests</t>
+                                        <t t-set="main_record_action" t-value="'open_requests'"/>
+                                    </t>
+                                </div>
+                                <div class="col-3 main_block">
+                                    <t t-call="maintenance_dashboard_block">
+                                        <t t-set="main_record_color" t-value="record.inprogress_requests_color.raw_value"/>
+                                        <t t-set="main_record_icon" t-value="'fa-cogs'"/>
+                                        <t t-set="main_field_name" t-value="record.inprogress_requests.raw_value"/>
+                                        <t t-set="main_record_lable">Inprogress Maintenance</t>
+                                        <t t-set="main_record_action" t-value="'open_inprogress_requests'"/>
+                                    </t>
+                                </div>
+                                 <div class="col-3 main_block">
+                                    <t t-call="maintenance_dashboard_block">
+                                        <t t-set="main_record_color" t-value="record.repaired_requests_color.raw_value"/>
+                                        <t t-set="main_record_icon" t-value="'fa-cogs'"/>
+                                        <t t-set="main_field_name" t-value="record.repaired_requests.raw_value"/>
+                                        <t t-set="main_record_lable">Repaired maintenance</t>
+                                        <t t-set="main_record_action" t-value="'open_repaired_requests'"/>
+                                    </t>
+                                </div>
+
+                                <div class="col-3 main_block">
+                                    <t t-call="maintenance_dashboard_block">
+                                        <t t-set="main_record_color" t-value="record.scrap_requests_color.raw_value"/>
+                                        <t t-set="main_record_icon" t-value="'fa-cogs'"/>
+                                        <t t-set="main_field_name" t-value="record.scrap_requests.raw_value"/>
+                                        <t t-set="main_record_lable">Scrap Maintenance</t>
+                                        <t t-set="main_record_action" t-value="'open_scrap_requests'"/>
+                                    </t>
+                                </div>
+                                <div class="col-3 main_block">
+                                    <t t-call="maintenance_dashboard_block">
+                                        <t t-set="main_record_color" t-value="record.total_equipments_color.raw_value"/>
+                                        <t t-set="main_record_icon" t-value="'fa-wrench'"/>
+                                        <t t-set="main_field_name" t-value="record.total_equipments.raw_value"/>
+                                        <t t-set="main_record_lable">Total Equipments</t>
+                                        <t t-set="main_record_action" t-value="'open_equipment'"/>
+                                    </t>
+                                </div>
+                                <div class="col-3 main_block">
+                                    <t t-call="maintenance_dashboard_block">
+                                        <t t-set="main_record_color" t-value="record.total_job_order_color.raw_value"/>
+                                        <t t-set="main_record_icon" t-value="'fa-list'"/>
+                                        <t t-set="main_field_name" t-value="record.total_job_order.raw_value"/>
+                                        <t t-set="main_record_lable">Total Job Order</t>
+                                        <t t-set="main_record_action" t-value="'open_job_order'"/>
+                                    </t>
+                                </div>
+                                <div class="col-3 main_block">
+                                    <t t-call="maintenance_dashboard_block">
+                                        <t t-set="main_record_color" t-value="record.total_requisition_color.raw_value"/>
+                                        <t t-set="main_record_icon" t-value="'fa-list'"/>
+                                        <t t-set="main_field_name" t-value="record.total_requisition.raw_value"/>
+                                        <t t-set="main_record_lable">Total Purchase Requisition</t>
+                                        <t t-set="main_record_action" t-value="'open_requisition'"/>
+                                    </t>
+                                </div>
+                                <div class="col-3 main_block">
+                                    <t t-call="maintenance_dashboard_block">
+                                        <t t-set="main_record_color" t-value="record.draft_requisition_color.raw_value"/>
+                                        <t t-set="main_record_icon" t-value="'fa-list'"/>
+                                        <t t-set="main_field_name" t-value="record.draft_requisition.raw_value"/>
+                                        <t t-set="main_record_lable">Draft Purchase Requisition</t>
+                                        <t t-set="main_record_action" t-value="'open_draft_requisition'"/>
+                                    </t>
+                                </div>
+                                <div class="col-3 main_block">
+                                    <t t-call="maintenance_dashboard_block">
+                                        <t t-set="main_record_color" t-value="record.ongoing_requisition_color.raw_value"/>
+                                        <t t-set="main_record_icon" t-value="'fa-list'"/>
+                                        <t t-set="main_field_name" t-value="record.ongoing_requisition.raw_value"/>
+                                        <t t-set="main_record_lable">Ongoing Purchase Requisition</t>
+                                        <t t-set="main_record_action" t-value="'open_ongoing_requisition'"/>
+                                    </t>
+                                </div>
+                                <div class="col-3 main_block">
+                                    <t t-call="maintenance_dashboard_block">
+                                        <t t-set="main_record_color" t-value="record.close_requisition_color.raw_value"/>
+                                        <t t-set="main_record_icon" t-value="'fa-list'"/>
+                                        <t t-set="main_field_name" t-value="record.close_requisition.raw_value"/>
+                                        <t t-set="main_record_lable">Closed Purchase Requisition</t>
+                                        <t t-set="main_record_action" t-value="'open_close_requisition'"/>
+                                    </t>
+                                </div>
+                                <div class="col-3 main_block">
+                                    <t t-call="maintenance_dashboard_block">
+                                        <t t-set="main_record_color" t-value="record.cancel_requisition_color.raw_value"/>
+                                        <t t-set="main_record_icon" t-value="'fa-list'"/>
+                                        <t t-set="main_field_name" t-value="record.cancel_requisition.raw_value"/>
+                                        <t t-set="main_record_lable">Cancel Purchase Requisition</t>
+                                        <t t-set="main_record_action" t-value="'open_cancel_requisition'"/>
+                                    </t>
+                                </div>
+                            </div>
+                            <br></br>
+
+                            <div class="row" id="maintenance_request_list" >
+                                <div class="col-12 mb32">
+                                    <t t-value="JSON.parse(record.maintenance_request_data.raw_value)" t-set="maintenance_request_data"/>
+                                    <div class="card">
+                                        <h5 class="card-header">
+                                            <a style="color: #883F73;" type="object" name="open_requests">Maintenance Request</a> <a href="#" title="This will show max 20 records only" class="o_doc_link"/>
+                                        </h5>
+                                        <div class="card-body p-0" >
+                                            <div class="table-responsive table-striped">
+                                                <table class="table">
+                                                    <thead style="background-color:#883F73; color:white; font-weight: bold;">
+                                                        <tr class="border-0">
+                                                            <th class="border-0">#</th>
+                                                            <th class="border-0">Request</th>
+                                                            <th class="border-0">Equipment </th>
+                                                            <th class="border-0">Category</th>
+                                                            <th class="border-0">Priority</th>
+                                                            <th class="border-0">Scheduled</th>
+                                                            <th class="border-0">Stage</th>
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tbody>
+                                                        <tr t-foreach="maintenance_request_data" t-as="line">
+                                                            <td><span t-esc="line_index + 1"/>.</td>
+                                                            <td>
+                                                                <a t-attf-href="/web#id={{ line.id }}&amp;model=maintenance.request&amp;view_type=form">
+                                                                    <span t-esc="line.name"/>
+                                                                </a>
+                                                            </td>
+                                                            <td><span t-esc="line.equipment"/></td>
+                                                            <td><span t-esc="line.category"/></td>
+                                                            <td><span t-esc="line.priority"/></td>
+                                                            <td><span t-esc="line.scheduled_date"/></td>
+                                                            <td><span t-esc="line.stage"/></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="row" id="dashboard_graphs">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div t-attf-class="card main-card card-#{record.maintenance_bar_graph_color.raw_value}">
+                                        <div class="card-heading">
+                                            <i class="fa fa-area-chart" aria-label="Info" title="Info"></i> Maintenance
+                                        </div>
+                                        <div class="card-body o_main_dashboard_graph">
+                                            <t t-name="JournalBodyGraph">
+                                                <field name="maintenance_bar_graph" graph_type="bar"  widget="dashboard_graph"/>
+                                            </t>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record> 
+
+
+    <record id="action_maintenance_dashboard_dashboard_custom" model="ir.actions.act_window">
+        <field name="name">Maintenance Dashboard</field>
+        <field name="res_model">dashboard.dashboard</field>
+        <field name="view_mode">kanban</field>
+        <field name="view_id" ref="dashboard_dashboard_kanban_custom"/>
+        <field name="context">{}</field>
+    </record>
+
+    <menuitem
+        id="dashboard_dashoard_custom"
+        name="Maintenance Dashboard"
+        parent="maintenance.menu_maintenance_title"
+        action="action_maintenance_dashboard_dashboard_custom"/>
+</odoo>

@@ -1,0 +1,159 @@
+<odoo>
+    <template id="dps_maintenance_report_pdf_template">
+        <t t-call="web.basic_layout">
+                <div style="margin: 0; padding: 0;">
+                    <div class="row align-items-center text-center" style="margin:0; padding-bottom:0;">
+                        <div class="col-2 text-left" style="margin:0; padding:0;">
+                            <img t-if="docs.company_id.logo"
+                                 class="o_company_logo_big"
+                                 t-att-src="image_data_uri(docs.company_id.logo)"
+                                 alt="Logo" style="max-height: 80px; max-width: 100%;"/>
+                        </div>
+                        <div class="col-7 text-center" style="font-size:12px; font-family: Arial;">
+                            <strong t-field="docs.company_id.name"
+                                    style="font-size: 18px; font-weight:bold;"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt32 mb32" style="font-size:12px;">
+                    <div class="col-12" style="margin:0; margin-top:0; padding-top:0; padding:0px; font-family: Arial;"> 
+                        <div class="col-12 text-center">
+                            <span t-field="docs.company_id.partner_id" /> , <span t-field="docs.company_id.partner_id.street" /> , <span t-field="docs.company_id.partner_id.street2" /> , <span t-field="docs.company_id.partner_id.city" /> , <span t-field="docs.company_id.partner_id.zip" /> ,  <span t-field="docs.company_id.partner_id.country_id" /> , <span t-field="docs.company_id.partner_id.vat" />
+                        </div>
+                    </div>
+                </div>
+
+            <main>
+                <div class="page" style="font-family: Arial; font-size:12px;">
+                    <h2 style="text-align: center; margin-bottom: 20px;">Maintenance Report</h2>
+                    <div style="text-align: center; margin-top: 20px">
+                        <strong>Start Date:</strong>
+                        <t t-esc="docs.start_date"/>
+                        <strong style="padding-left:20px;">End Date:</strong>
+                        <t t-esc="docs.end_date"/>
+                    </div>
+                <br/>
+                <t t-foreach="docs.maintenance_ids" t-as="req">
+                    <h3 style="text-align:center; font-weight:bold; font-size:14px;">
+                        Request: <t t-esc="req.name or ''"/>
+                    </h3>
+                    <table class="table table-bordered"
+                           style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                        <thead style="display: table-header-group;">
+                            <tr style="background-color: #EDE9E4; text-align: center; font-weight:bold;">
+                                <!-- <th style="text-align:center; font-weight:bold;">Request</th> -->
+                                <th style="text-align:center; font-weight:bold;">Equipment</th>
+                                <th style="text-align:center; font-weight:bold;">Category</th>
+                                <th style="text-align:center; font-weight:bold;">Request Date</th>
+                                <th style="text-align:center; font-weight:bold;">Close Date</th>
+                                <th style="text-align:center; font-weight:bold;">Responsible</th>
+                                <th style="text-align:center; font-weight:bold;">Maintenance Cost</th>
+                                <th style="text-align:center; font-weight:bold;">Vendor</th>
+                                <th style="text-align:center; font-weight:bold;">Invoice</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                <tr>
+                                    <!-- <td style="text-align: center;" t-esc="req.name or ''"/> -->
+                                    <td style="text-align: center;" t-esc="req.equipment_id.name or ''"/>
+                                    <td style="text-align: center;" t-esc="req.category_id.name or ''"/>
+                                    <td style="text-align: center;" t-esc="req.request_date or ''"/>
+                                    <td style="text-align: center;" t-esc="req.close_date or ''"/>
+                                    <td style="text-align: center;" t-esc="req.user_id.name or ''"/>
+                                    <td style="text-align: right;" t-esc="'{:.2f}'.format(req.maintenance_cost or 0.0)"/>
+                                    <td style="text-align: center;" t-esc="req.requisition_vendor_id.name or ''"/>
+                                    <td style="text-align: center;" t-esc="req.invoice_id.name or ''"/>
+                                </tr>
+                                <tr>
+                                    <td colspan="8">
+                                        <strong>Checklist:</strong>
+                                        <table class="table table-sm table-bordered" 
+                                               style="width:100%; margin-top:5px; border-collapse: collapse; font-size:11px;">
+                                            <thead style="background:#F0F0F0; text-align:center;">
+                                                <tr>
+                                                    <th style="text-align:center; font-weight:bold;">No</th>
+                                                    <th style="text-align:center; font-weight:bold;">Title</th>
+                                                    <th style="text-align:center; font-weight:bold;">Description</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <t t-set="chk_index" t-value="0"/>
+                                                <t t-foreach="req.checklist_ids" t-as="chk">
+                                                    <t t-set="chk_index" t-value="chk_index + 1"/>
+                                                    <tr>
+                                                        <td style="text-align:center;" t-esc="chk_index"/>
+                                                        <td style="text-align:center;" t-esc="chk.title or ''"/>
+                                                        <td style="text-align:center;" t-esc="chk.description or ''"/>
+                                                    </tr>
+                                                </t>
+                                                <t t-if="not req.checklist_ids">
+                                                    <tr>
+                                                        <td colspan="4" style="text-align:center;color:black;font-weight:bold;">No checklist items</td>
+                                                    </tr>
+                                                </t>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="8">
+                                        <strong>Product Requisition:</strong>
+                                        <table class="table table-sm table-bordered" 
+                                               style="width:100%; margin-top:5px; border-collapse: collapse; font-size:11px;">
+                                            <thead style="background:#F0F0F0; text-align:center;">
+                                                <tr>
+                                                    <th style="text-align:center; font-weight:bold;">No</th>
+                                                    <th style="text-align:center; font-weight:bold;">Product</th>
+                                                    <th style="text-align:center; font-weight:bold;">Qty</th>
+                                                    <th style="text-align:center; font-weight:bold;">UoM</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <t t-set="prod_index" t-value="0"/>
+                                                <t t-foreach="req.requisition_maintenance_ids" t-as="prod">
+                                                    <t t-set="prod_index" t-value="prod_index + 1"/>
+                                                    <tr>
+                                                        <td style="text-align:center;" t-esc="prod_index"/>
+                                                        <td style="text-align:center;" t-esc="prod.product_id.name or ''"/>
+                                                        <td style="text-align:center;" t-esc="prod.quantity or 0.0"/>
+                                                        <td style="text-align:center;" t-esc="prod.uom_id.name or ''"/>
+                                                    </tr>
+                                                </t>
+                                                <t t-if="not req.requisition_maintenance_ids">
+                                                    <tr>
+                                                        <td colspan="6" style="text-align:center;color:black; font-weight:bold;">No product requisitions</td>
+                                                    </tr>
+                                                </t>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                        </tbody>
+                    </table>
+                    <br/>
+                </t>
+                </div>
+            </main>
+        </t>
+    </template>
+
+    <record id="maintenance_report_portrait_format" model="report.paperformat">
+        <field name="name">Maintenance Portrait Format</field>
+        <field name="orientation">Portrait</field>
+        <field name="format">A4</field>
+        <field name="margin_top">20</field>
+        <field name="margin_bottom">20</field>
+        <field name="margin_left">15</field>
+        <field name="margin_right">15</field>
+    </record>
+
+
+    <record id="dps_action_maintenance_report_pdf" model="ir.actions.report">
+        <field name="name">Maintenance Report</field>
+        <field name="model">wizard.maintenance.report</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">dps_asset_maintenance_app.dps_maintenance_report_pdf_template</field>
+        <field name="binding_model_id" ref="model_wizard_maintenance_report"/>
+        <field name="paperformat_id" ref="maintenance_report_portrait_format"/>
+    </record>
+</odoo>

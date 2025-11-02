@@ -1,0 +1,8 @@
+<odoo>
+    <menuitem id="menu_my_report"
+              name="My Report"
+              parent="stock.menu_warehouse_report"
+              action="action_warehouse_location_wizard"
+              sequence="50"/>
+</odoo>
+ 
