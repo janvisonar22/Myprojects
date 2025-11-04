@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="dps_pos_session_xzreport.PosXReport" t-inherit="point_of_sale.ControlButtons" t-inherit-mode="extension">
+        <xpath expr="//t[@t-if='props.showRemainingButtons']/div" position="inside">
+            <button class="btn btn-secondary btn-lg py-5" t-on-click="() => this.pos.printXReport()">
+                <i class="fa fa-print"></i> X Report Print 
+            </button>
+            <button class="btn btn-secondary btn-lg py-5" t-on-click="() => this.pos.printZReport()">
+                <i class="fa fa-calculator"></i> Session Report
+            </button>
+        </xpath>
+    </t>
+
+
+</templates>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+        <record id="report_pos_sales_thermal_front" model="ir.actions.report">
+            <field name="name">X Report</field>
+            <field name="model">pos.session</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">dps_pos_session_xzreport.front_sales_thermal_report_template</field>
+            <field name="report_file">dps_pos_session_xzreport.front_sales_thermal_report_template</field>
+        </record>
+
+        <record id="report_pos_sales_pdf_front" model="ir.actions.report">
+            <field name="name">X Report(pdf)</field>
+            <field name="model">pos.session</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">dps_pos_session_xzreport.front_sales_report_pdf_template</field>
+            <field name="report_file">dps_pos_session_xzreport.front_sales_report_pdf_template</field>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="paperformat_session_receipt_pdf" model="report.paperformat">
+            <field name="name">Session Receipt PDF</field>
+            <field name="default" eval="True"/>
+            <field name="format">custom</field>
+            <field name="page_height">297</field>
+            <field name="page_width">80</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">1</field>
+            <field name="margin_bottom">1</field>
+            <field name="margin_left">1</field>
+            <field name="margin_right">1</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">0</field>
+            <field name="dpi">90</field>
+            <field name="report_ids" eval="[(6,0,[ref('dps_pos_session_xzreport.report_pos_sales_pdf_front'),
+                ref('dps_pos_session_xzreport.report_pos_sales_pdf_front')])]"/>
+
+        </record>
+
+    </data>
+</odoo>

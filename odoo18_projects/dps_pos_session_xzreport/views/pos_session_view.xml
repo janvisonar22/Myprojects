@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="point_of_sale.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//block[@id='product_and_category_block']" position="after">
+                    <block title="POS Z Report Settings" id="sc_pos_zreport_block">
+                        <setting id="allow_z_report" string="Allow Session Z Report">
+                            <field name="sc_session_report"/>
+                        </setting>
+                    </block>
+            </xpath>
+        </field>
+    </record>
+
+
+	<record id="view_pos_session_form_report_button" model="ir.ui.view">
+        <field name="name">pos.session.form.view.session.button</field>
+        <field name="model">pos.session</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_session_form"></field>
+        <field name="arch" type="xml">
+        	<xpath expr="//header/button[@name='action_pos_session_closing_control']" position='after'>
+                <button name="action_session_z_report" type="object" string="Session Z Report" class="oe_highlight"
+                                        invisible="not sc_session_report"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

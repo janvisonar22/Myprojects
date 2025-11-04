@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_wizard_pos_x_report,access_wizard_pos_x_report,model_wizard_pos_x_report,,1,1,1,1
+dps_pos_session_xzreport.access_wizard_pos_sale_report,access_wizard_pos_sale_report,dps_pos_session_xzreport.model_wizard_pos_sale_report,,1,1,1,1
+
+
