@@ -1,4 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_project_dashboard,access_project_dashboard,model_project_dashboard,,1,1,1,1
-project_dashboard_manager_access,Project Dashboard Manager Access,model_project_dashboard,project.group_project_manager,1,1,1,1
-project_dashboard_finance_access,Project Dashboard Finance Access,model_project_dashboard,project_custom_dashboard.group_finance_viewer,1,0,0,0
