@@ -1,0 +1,19 @@
+<odoo>
+<!--        <record model="ir.module.category" id="custom_category_project">-->
+<!--        <field name="description">Project Dashboard</field>-->
+
+<!--        </record>-->
+
+    <!-- Project Manager group (already exists in Odoo) -->
+    <record id="group_project_manager" model="res.groups">
+        <field name="name">Project Manager</field>
+                <field name="category_id" ref="base.module_category_services_project"/>
+
+    </record>
+
+    <!-- Custom Finance Viewer group -->
+    <record id="group_finance_viewer" model="res.groups">
+        <field name="name">Finance Viewer</field>
+        <field name="category_id" ref="base.module_category_services_project"/>
+    </record>
+</odoo>

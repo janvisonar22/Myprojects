@@ -1,0 +1,51 @@
+<odoo>
+    <record id="view_hr_contract_form_custom" model="ir.ui.view">
+        <field name="name">hr.contract.form.custom</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='job_id']" position="after">
+                    <field name="current_date"/>
+                    <field name="salary_start_month"/>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+
+                <page string="Resignation Details">
+
+                    <field name="resignation_line_ids">
+                        <list editable="bottom">
+                            <field name="submit_date"/>
+                            <field name="reason"/>
+                            <field name="approved_date"/>
+                            <field name="rejected_date"/>
+                            <field name="state"/>
+
+                                    <button name="action_approve"
+                                            type="object"
+                                            string="Approve"
+                                            states="draft"
+                                            class="btn-primary"/>
+
+                                    <button name="action_reject"
+                                            type="object"
+                                            string="Reject"
+                                            states="draft"
+                                            class="btn-danger"/>
+
+                                    <button name="action_reset_draft"
+                                            type="object"
+                                            string="Set to Draft"
+                                            states="approved,rejected"
+                                            class="btn-secondary"/>
+
+                        </list>
+                    </field>
+
+                </page>
+
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

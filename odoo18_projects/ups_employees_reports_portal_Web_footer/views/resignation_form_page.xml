@@ -1,0 +1,29 @@
+<odoo>
+<template id="portal_resignation_form" name="Resignation Form">
+    <t t-call="portal.portal_layout">
+        <t t-set="title">Submit Resignation</t>
+
+        <div class="container mt-5" style="max-width:600px;">
+            <h3>Submit Resignation</h3>
+
+            <form method="post" action="/my/contracts/resignation/submit">
+                <input type="hidden" name="contract_id" t-att-value="contract.id"/>
+
+                <div class="form-group mt-3">
+                    <label>Submit Date</label>
+                    <input type="date" name="submit_date" class="form-control"/>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label>Reason</label>
+                    <textarea name="reason" class="form-control"></textarea>
+                </div>
+
+                <button class="btn btn-primary mt-4" type="submit">
+                    Confirm Resignation
+                </button>
+            </form>
+        </div>
+    </t>
+</template>
+</odoo>

@@ -1,0 +1,126 @@
+<odoo>
+    <!-- Portal Home Card for My Contracts -->
+    <template id="portal_my_home_contracts"
+              inherit_id="portal.portal_my_home"
+              name="Portal My Contracts">
+
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <div class="o_portal_index_card col-md-6">
+                <t t-call="portal.portal_docs_entry">
+                    <t t-set="icon" t-value="'/ups_employees_reports/static/src/img/portal-connection.svg'"/>
+                    <t t-set="title">My Contracts</t>
+                    <t t-set="url" t-value="'/my/contracts'"/>
+                    <t t-set="text">View your HR Contracts</t>
+                    <t t-set="placeholder_count" t-value="'contract_count'"/>
+                </t>
+            </div>
+        </xpath>
+    </template>
+
+
+    <!-- CONTRACT LIST PAGE -->
+    <template id="portal_my_contracts" name="My Contracts">
+        <t t-call="portal.portal_layout">
+            <t t-set="title">My Contracts</t>
+
+            <style>
+                .upstack-section {
+                    margin-top: 40px;
+                    padding: 20px;
+                    border-radius: 18px;
+                    background: rgba(255,255,255,0.15);
+                    backdrop-filter: blur(10px);
+                    box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+                    animation: fadeIn 0.8s ease;
+                }
+                .upstack-title {
+                    font-size: 32px;
+                    font-weight: 700;
+                    background: linear-gradient(90deg, #0052d4, #4364f7, #6fb1fc);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                }
+                .upstack-table {
+                    width: 100%;
+                    border-radius: 14px;
+                    overflow: hidden;
+                    margin-top: 20px;
+                    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+                }
+                .upstack-table thead {
+                    background: linear-gradient(90deg, #0052d4, #4364f7, #6fb1fc);
+                    color: white;
+                }
+                .upstack-table tbody tr:hover {
+                    background: #f6f9ff;
+                    cursor: pointer;
+                }
+                .badge-upstack {
+                    padding: 6px 14px;
+                    border-radius: 12px;
+                    font-size: 13px;
+                    background: linear-gradient(45deg, #00b09b, #96c93d);
+                    color: #fff;
+                }
+                @keyframes fadeIn {
+                    from { opacity:0; transform:translateY(10px); }
+                    to   { opacity:1; transform:translateY(0); }
+                }
+            </style>
+
+            <div class="container upstack-section">
+                <h2 class="upstack-title">Your Contracts</h2>
+
+                <table class="table upstack-table">
+                    <thead>
+                        <tr>
+                            <th>Contract</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Salary</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <!-- EACH ROW CLICKABLE -->
+                        <t t-foreach="contracts" t-as="c">
+                            <tr t-att-onclick="'window.location=\'/my/contracts/%s\'' % c.id"
+                                style="cursor:pointer;">
+
+                                <!-- Contract Name -->
+                                <td>
+                                    <a t-att-href="'/my/contracts/%s' % c.id"
+                                       style="color:#0056d6; text-decoration:none; font-weight:700;">
+                                        <t t-esc="c.name"/>
+                                    </a>
+                                </td>
+
+                                <td><t t-esc="c.date_start"/></td>
+                                <td><t t-esc="c.date_end or '-'"/></td>
+
+                                <td>₹ <t t-esc="c.wage"/></td>
+
+                                <td>
+                                    <span class="badge-upstack"><t t-esc="c.state"/></span>
+                                </td>
+                            </tr>
+                        </t>
+
+                        <!-- NO DATA -->
+                        <t t-if="not contracts">
+                            <tr>
+                                <td colspan="5" class="text-center" style="padding:30px; color:#444;">
+                                    No contracts found.
+                                </td>
+                            </tr>
+                        </t>
+
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+
+</odoo>

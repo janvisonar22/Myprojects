@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- REMOVE DEFAULT FOOTER -->
+    <template id="footer_custom" inherit_id="website.footer_custom" name="Upstackers Footer Clean" active="True">
+        <xpath expr="//div[@id='footer']" position="replace">
+        </xpath>
+    </template>
+
+    <!-- NEW CUSTOM FOOTER -->
+    <template id="footer_upstackers" inherit_id="website.layout">
+        <xpath expr="//footer" position="replace">
+            
+            <footer id="footer" class="o_footer o_colored_level"
+                    style="background: #0a1a3c; padding: 50px 0; color: white;">
+
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-md-4 mb-4">
+                            <h3 style="font-weight: 700; 
+                                       background: linear-gradient(90deg,#0052d4,#4364f7,#6fb1fc);
+                                       -webkit-background-clip: text;
+                                       -webkit-text-fill-color: transparent;">
+                                UPSTACKERS TECHNOLOGY
+                            </h3>
+                            <p style="font-size:14px; opacity:0.8; line-height:22px;">
+                                Crafting modern software solutions with innovation, speed,
+                                and excellence. Turning ideas into intelligent digital products.
+                            </p>
+                        </div>
+
+                        <!-- USEFUL LINKS -->
+                        <div class="col-md-2 mb-4">
+                            <h5 style="font-weight:600; margin-bottom:15px;">Company</h5>
+                            <ul class="list-unstyled footer-list">
+                                <li><a href="/" style="color:#ccc;">Home</a></li>
+                                <li><a href="/about" style="color:#ccc;">About Us</a></li>
+                                <li><a href="/services" style="color:#ccc;">Services</a></li>
+                                <li><a href="/contactus" style="color:#ccc;">Contact</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- SERVICES -->
+                        <div class="col-md-3 mb-4">
+                            <h5 style="font-weight:600; margin-bottom:15px;">Services</h5>
+                            <ul class="list-unstyled footer-list">
+                                <li><a href="#" style="color:#ccc;">Software Development</a></li>
+                                <li><a href="#" style="color:#ccc;">Cloud Solutions</a></li>
+                                <li><a href="#" style="color:#ccc;">IT Consulting</a></li>
+                                <li><a href="#" style="color:#ccc;">Web and App Development</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- SOCIAL -->
+                        <div class="col-md-3 mb-4">
+                            <h5 style="font-weight:600; margin-bottom:15px;">Follow Us</h5>
+
+                            <a href="#" class="me-3" style="color:white; font-size:22px;">
+                                <i class="fa-brands fa-facebook"></i>
+                            </a>
+                            <a href="#" class="me-3" style="color:white; font-size:22px;">
+                                <i class="fa-brands fa-instagram"></i>
+                            </a>
+                            <a href="#" class="me-3" style="color:white; font-size:22px;">
+                                <i class="fa-brands fa-linkedin"></i>
+                            </a>
+                            <a href="#" class="me-3" style="color:white; font-size:22px;">
+                                <i class="fa-brands fa-github"></i>
+                            </a>
+                        </div>
+
+                    </div>
+
+                    <hr style="border-color: rgba(255,255,255,0.1);" />
+
+                    <div class="text-center mt-3">
+                        <span style="opacity:0.7; font-size:14px;">
+                            © Copyright
+                            <strong>UPSTACKERS</strong> — All Rights Reserved
+                        </span>
+                    </div>
+
+                </div>
+            </footer>
+
+        </xpath>
+    </template>
+
+</odoo>

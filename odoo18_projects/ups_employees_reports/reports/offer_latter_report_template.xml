@@ -1,0 +1,239 @@
+<odoo>
+    <template id="report_offer_latter_document">
+        <t t-call="web.basic_layout">
+
+            <t t-foreach="docs" t-as="doc">
+
+                <header>
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+
+                    <div style="display: flex; align-items: center; padding: 10px 20px;">
+                        <div style="margin-right: 15px;">
+                            <img t-att-src="'/ups_employees_reports/static/src/img/logo.jpeg'" style="width:115px;"/>
+                        </div>
+
+                        <div style="display:flex; flex-direction:column;">
+                            <span style="
+                                font-size: 29px;
+                                font-weight: 800;
+                                text-transform: uppercase;
+                                letter-spacing: 1px;
+                                color: #E95532;
+                                font-family: serif;
+                                font-weight: bold;
+                            ">
+                                UPSTACKERS
+                            </span>
+
+                            <span style="
+                                font-size: 19px;
+                                font-weight: 800;
+                                text-transform: uppercase;
+                                letter-spacing: 2px;
+                                color: #2E2E2E;
+                                margin-top: -5px;
+                                font-family: 'Cursive';
+                                padding-left: 24px;
+                            ">
+                                TECHNOLOGIES
+                            </span>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- ========================================= -->
+                <div class="page" style="font-family: Arial; font-size: 14px; padding: 20px; position:relative;">
+
+                    <!-- WATERMARK -->
+                    <div style="
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%) rotate(-35deg);
+                        opacity: 0.3;
+                        z-index: 1;
+                        text-align: center;
+                        pointer-events: none;
+                        width: 100%;
+                    ">
+                        <div style="display: flex; align-items: center; justify-content: center;">
+                            <div style="margin-right: 15px;">
+                                <img t-att-src="'/ups_employees_reports/static/src/img/logo.jpeg'" style="width:160px;"/>
+                            </div>
+
+                            <div style="display:flex; flex-direction:column; justify-content:center;">
+                                <span style="
+                                    font-size: 29px;
+                                    font-weight: 800;
+                                    text-transform: uppercase;
+                                    letter-spacing: 3px;
+                                    color: #E95532;
+                                    font-family: serif;
+                                    font-weight: bold;
+                                ">
+                                    UPSTACKERS
+                                </span>
+
+                                <span style="
+                                    font-size: 19px;
+                                    font-weight: 800;
+                                    text-transform: uppercase;
+                                    letter-spacing: 3px;
+                                    color: #2E2E2E;
+                                    margin-top: -5px;
+                                    font-family: 'Cursive';
+                                    padding-left: 24px;
+                                ">
+                                    TECHNOLOGIES
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4 style="
+                        text-align:center;
+                        text-transform: uppercase;
+                        margin-bottom: 20px;
+                        font-weight:600;
+                    ">
+                        OFFER LETTER
+                    </h4>
+
+                    <div style="text-align: right; font-size: 15px;">
+                        <strong>Date:</strong>
+                            <span t-esc="doc.current_date" t-options='{"widget": "date"}'/>
+                    </div>
+
+
+
+                    <p>Dear <strong><t t-esc="doc.employee_id.name"/></strong>,</p>
+
+
+                    <p>
+                        We are pleased to confirm that
+                        <strong><t t-esc="doc.company_id.name"/></strong>
+                        would like to formally offer you the <t t-esc="doc.contract_type_id.name"/> position of
+                        <strong><t t-esc= "doc.job_id.name"/></strong> with an anticipated start date of
+                        <strong><t t-esc="doc.date_start"/></strong>.
+                    </p>
+
+
+                    <p>
+                        On your first day , You Should bring all Documents Which are mentioned Below. Copies
+                        will be taken of these documents for our records.
+                    </p>
+
+
+                    <p><strong>List of Required Documents:</strong></p>
+
+                    <ul>
+                        <li>Two satisfactory references from the information you provided.</li>
+                        <li>Experience letters of previous organizations and Relieving Letters of Current.</li>
+                        <li>Evidence of qualifications(original Certificates).</li>
+                        <li>Last 3 months’s of salary slips or bank statement.</li>
+                        <li>Evidence of Citizens in India (Aadhar Card, PAN Card, or Driving Licence).</li>
+                        <li>Valid , current and permanent address proof.</li>
+                        <li>Two passport-size Photocopy.</li>
+                        <li>Bank details for monthly Pay (Account No, IFSC Code And Account Holder name).</li>
+                    </ul>
+
+
+                    <p>
+                        You will be employed at the company’s office at address Of <br/>
+                        <span t-esc="doc.company_id.street"/>,
+                        <span t-esc="doc.company_id.city"/>,
+                        <span t-esc="doc.company_id.state_id.name"/> -
+                        <span t-esc="doc.company_id.zip"/>
+                    </p>
+
+                    <p>
+                        Your commencing salary will be
+                        <strong>₹ <t t-esc="doc.wage * 12"/> per annum</strong>, payable on a monthly basis and
+                        first Payment will be in <strong><t t-if="doc.salary_start_month">
+    <t t-esc="doc.salary_start_month.strftime('%B %Y')"/>
+</t>
+</strong>.
+                        Your Employment does not attract bonus Payment.
+                    </p>
+
+                    <p><strong>Working Hours:</strong></p>
+                    <p>
+                        Monday to Friday: 9:30 AM to 6:30 PM<br/>
+                        Lunch Break: 1:00 PM to 2:00 PM
+                    </p>
+
+                </div>
+
+                <div class="custom-footer-content-block"
+                    style="width: 100%; font-family: Arial, sans-serif; font-size: 14px; color: #555; position: relative;
+                        bottom: -480px;">
+
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0;">
+
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span style="
+                                display: inline-flex;
+                                justify-content: center;
+                                align-items: center;
+                                width: 24px;
+                                height: 24px;
+                                border-radius: 50%;
+                                background-color: #1F1F1F;
+                                color: #fff;
+                                font-size: 15px;
+                            ">
+                                <i class="fa-solid fa-envelope"></i>
+                            </span>
+                            <span style="margin-left: 12px; font-size: 15px;" t-esc="doc.company_id.email"/>
+                        </div>
+
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span style="
+                                display: inline-flex;
+                                justify-content: center;
+                                align-items: center;
+                                width: 24px;
+                                height: 24px;
+                                border-radius: 50%;
+                                background-color: #e54a4a;
+                                color: #fff;
+                                font-size: 15px;
+                            ">
+                                <i class="fa-solid fa-phone"></i>
+                            </span>
+                            <span style="margin-left: 12px; font-size: 15px;" t-esc="doc.company_id.phone"/>
+                        </div>
+
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span style="
+                                display: inline-flex;
+                                justify-content: center;
+                                align-items: center;
+                                width: 24px;
+                                height: 24px;
+                                border-radius: 50%;
+                                background-color: #d1c81a;
+                                color: #fff;
+                                font-size: 15px;
+                            ">
+                                <i class="fa-solid fa-globe"></i>
+                            </span>
+                            <span style="margin-left: 12px; font-size: 15px;" t-esc="doc.company_id.website"/>
+                        </div>
+
+                    </div>
+
+                    <div style="text-align: center; margin-top: 5px;">
+                        <span t-esc="doc.company_id.street"/>,
+                        <span t-esc="doc.company_id.city"/>,
+                        <span t-esc="doc.company_id.state_id.name"/> -
+                        <span t-esc="doc.company_id.zip"/>
+                    </div>
+
+                </div>
+
+            </t>
+
+        </t>
+    </template>
+</odoo>

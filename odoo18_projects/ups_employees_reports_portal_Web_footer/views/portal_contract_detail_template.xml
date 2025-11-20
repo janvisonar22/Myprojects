@@ -1,0 +1,25 @@
+<odoo>
+
+<template id="portal_contract_detail_template" name="Contract Detail">
+    <t t-call="portal.portal_layout">
+        <t t-set="title">Contract Details</t>
+
+        <div class="container mt-4">
+
+            <h3>Contract: <t t-esc="contract.name"/></h3>
+                 <a t-att-href="'/my/contracts/%s/resign' % contract.id"
+                   class="btn btn-danger">
+                    Submit Resignation
+                </a>
+
+            <div class="card mt-3 p-3">
+                <p><strong>Employee:</strong> <t t-esc="contract.employee_id.name"/></p>
+                <p><strong>Current Date:</strong> <t t-esc="contract.current_date"/></p>
+                <p><strong>Salary Start Month:</strong> <t t-esc="contract.salary_start_month"/></p>
+            </div>
+
+
+        </div>
+    </t>
+</template>
+</odoo>
